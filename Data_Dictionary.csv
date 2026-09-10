@@ -1,0 +1,35 @@
+MODULE 7: TỪ ĐIỂN DỮ LIỆU (DATA DICTIONARY) & THIẾT KẾ SCHEMA CƠ SỞ DỮ LIỆU WEBAPP,Unnamed: 1,Unnamed: 2,Unnamed: 3,Unnamed: 4,Unnamed: 5,Unnamed: 6,Unnamed: 7,Unnamed: 8,Unnamed: 9
+"Chuẩn hóa thực thể CSDL quan hệ (PostgreSQL / Supabase), kiểu dữ liệu, ràng buộc toàn vẹn, ma trận phân quyền RBAC và bảo mật Audit Log",,,,,,,,,
+,,,,,,,,,
+STT,Mã Module,Tên Bảng CSDL (Table Name),Tên Cột Thuộc tính (Column Name),Kiểu Dữ liệu SQL (Data Type),Ràng buộc Toàn vẹn (Constraints),Khóa Liên kết (Relationship),Ý nghĩa Nghiệp vụ Chi tiết,Phân quyền Truy cập (RBAC),Yêu cầu Bảo mật & Audit Log
+1,MOD_01,bks_governance_resolutions,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,Định danh duy nhất của mỗi nghị quyết / quyết định được giám sát,Tất cả vai trò (Read),Bảo mật khóa chính
+2,MOD_01,bks_governance_resolutions,resolution_code,VARCHAR(100),"NOT NULL, UNIQUE",,Số hiệu văn bản pháp lý (Ví dụ: NQ-01/2026/ĐHĐCĐ),"Truong_BKS, KSV (CRUD)",Index tìm kiếm nhanh
+3,MOD_01,bks_governance_resolutions,issuer_level,"ENUM('DHDCD','HDQT','TONG_GIAM_DOC')",NOT NULL,,Cấp ban hành văn bản để phân luồng kiểm soát thẩm quyền,"Truong_BKS, KSV (CRUD)",Kiểm soát hợp lệ
+4,MOD_01,bks_governance_resolutions,issue_date,DATE,NOT NULL,,Ngày ký ban hành văn bản chính thức,"Truong_BKS, KSV (CRUD)",Lọc thời gian
+5,MOD_01,bks_governance_resolutions,compliance_status,"ENUM('DUNG_THAM_QUYEN','VUOT_THAM_QUYEN')","NOT NULL, DEFAULT 'DUNG_THAM_QUYEN'",,Kết luận thẩm tra của BKS về tính tuân thủ thẩm quyền luật định,CHỈ Trưởng BKS có quyền cập nhật,Audit Log: Ghi nhận sửa đổi
+6,MOD_01,bks_governance_resolutions,bks_audit_notes,TEXT,NULLABLE,,"Nhận xét, phân tích chuyên sâu và khuyến nghị của BKS",CHỈ Ban Kiểm soát (Read/Write),Bảo mật nội bộ BKS
+7,MOD_02,bks_financial_audits,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,Khóa chính bản ghi giám sát báo cáo tài chính theo kỳ,Tất cả vai trò (Read),Bảo mật khóa chính
+8,MOD_02,bks_financial_audits,period_code,VARCHAR(20),NOT NULL,,"Kỳ báo cáo tài chính (Q1_2026, HY_2026, FY_2026)","Truong_BKS, KSV (CRUD)",Index tìm kiếm
+9,MOD_02,bks_financial_audits,cfo_cash_flow,"DECIMAL(18,2)","NOT NULL, DEFAULT 0",,Dòng tiền thuần từ hoạt động kinh doanh (CFO) - Cảnh báo tự động nếu âm,"Truong_BKS, KSV (CRUD)",Trigger cảnh báo đỏ nếu < 0
+10,MOD_02,bks_financial_audits,audit_opinion,"ENUM('CHAP_NHAN_TOAN_PHAN','NHAN_MANH','NGOAI_TRU','TU_CHOI')",NOT NULL,,Ý kiến chính thức của kiểm toán viên độc lập,"Truong_BKS, KSV (CRUD)",Audit Trail
+11,MOD_02,bks_financial_audits,receivable_ratio,"DECIMAL(5,4)","NOT NULL, CHECK (receivable_ratio >= 0)",,Tỷ lệ nợ phải thu trên tổng tài sản - Cảnh báo nếu > 40%,"Truong_BKS, KSV (CRUD)",Tự động tính toán
+12,MOD_03,bks_related_party_txs,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,Khóa chính giao dịch bên liên quan (RPT),Tất cả vai trò (Read),Bảo mật khóa chính
+13,MOD_03,bks_related_party_txs,party_name,VARCHAR(255),NOT NULL,,Tên cá nhân / tổ chức bên liên quan theo Luật DN,"Truong_BKS, KSV (CRUD)",Index tìm kiếm
+14,MOD_03,bks_related_party_txs,tx_value,"DECIMAL(18,2)","NOT NULL, CHECK (tx_value > 0)",,Giá trị giao dịch để tính toán tỷ lệ trên Tổng tài sản,"Truong_BKS, KSV (CRUD)",Xác thực số dương
+15,MOD_03,bks_related_party_txs,approval_authority,"ENUM('DHDCD','HDQT','TONG_GIAM_DOC')",NOT NULL,,Thẩm quyền phê duyệt luật định căn cứ quy mô và Điều lệ,"Truong_BKS, KSV (CRUD)",Bắt buộc kiểm tra chéo
+16,MOD_03,bks_related_party_txs,voting_abstention_ok,BOOLEAN,"NOT NULL, DEFAULT TRUE",,Xác nhận người có quyền lợi liên quan có miễn trừ biểu quyết,CHỈ Trưởng BKS thẩm định,Audit Trail
+17,MOD_04,bks_audit_findings,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,Khóa chính phát hiện kiểm toán nội bộ / kiểm tra chuyên đề,Ban Kiểm soát,Bảo mật khóa chính
+18,MOD_04,bks_audit_findings,risk_level,"ENUM('THAP','TRUNG_BINH','CAO','NGHIEM_TRONG')",NOT NULL,,Phân loại cấp độ rủi ro để đưa lên Dashboard giám sát điều hành,Ban Kiểm soát,Dashboard Priority Badge
+19,MOD_04,bks_audit_findings,action_plan_status,"ENUM('CHUA_XU_LY','DANG_XU_LY','DA_KHAC_PHUC','QUA_HAN')",NOT NULL,,Trạng thái khắc phục kiến nghị của Ban Điều hành,Ban Điều hành cập nhật tiến độ; BKS xác nhận,Tự động đổi màu nếu quá hạn
+20,MOD_04,bks_audit_findings,target_deadline,DATE,NOT NULL,,Hạn chót Ban Điều hành cam kết hoàn thành khắc phục kiến nghị,"Truong_BKS, KSV",Countdown cảnh báo quá hạn
+21,MOD_05,bks_information_disclosure,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,Khóa chính sự kiện công bố thông tin,Tất cả vai trò,Bảo mật khóa chính
+22,MOD_05,bks_information_disclosure,legal_deadline,TIMESTAMP,NOT NULL,,Hạn chót luật định phải công bố theo Thông tư 96/2020,"Truong_BKS, KSV",Countdown Timer trên WebApp
+23,MOD_05,bks_information_disclosure,actual_disclosed_at,TIMESTAMP,NULLABLE,,Thời điểm thực tế gửi thông tin tới UBCKNN và SGDCK,"Truong_BKS, KSV",So sánh tự động với Deadline
+24,MOD_05,bks_information_disclosure,timeliness_status,"ENUM('DUNG_HAN','CHAM_HAN','CHUA_CONG_BO')","NOT NULL, DEFAULT 'DUNG_HAN'",,Đánh giá tính kịp thời của việc công bố thông tin,Hệ thống tự động tính toán,Cảnh báo vi phạm hành chính
+25,MOD_06,bks_reports_and_plans,id,UUID / BIGSERIAL,"PRIMARY KEY, NOT NULL",,"Khóa chính hồ sơ báo cáo, biên bản làm việc của BKS",Tất cả vai trò (Read),Bảo mật khóa chính
+26,MOD_06,bks_reports_and_plans,report_code,VARCHAR(100),"NOT NULL, UNIQUE",,Số hiệu văn bản báo cáo (Ví dụ: BKS-BC-01/ĐHĐCĐ),"Truong_BKS, KSV (CRUD)",Index tìm kiếm
+27,MOD_06,bks_reports_and_plans,submission_target,"ENUM('DHDCD','HDQT','TONG_GIAM_DOC','NOI_BO_BKS')",NOT NULL,,Cấp thẩm quyền nhận báo cáo theo quy định của Luật DN,"Truong_BKS, KSV (CRUD)",Phân loại thụ lý
+28,AUDIT,bks_system_audit_logs,id,BIGSERIAL,"PRIMARY KEY, NOT NULL",,Khóa chính bảng nhật ký ghi vết toàn bộ thao tác người dùng (Audit Log),Chỉ Quản trị viên hệ thống (Read),Bất biến (Append-only)
+29,AUDIT,bks_system_audit_logs,user_id,UUID,NOT NULL,FK -> users(id),ID người dùng thực hiện hành vi Thêm / Sửa / Xóa dữ liệu,Hệ thống tự động ghi,Không cho phép chỉnh sửa
+30,AUDIT,bks_system_audit_logs,action_type,VARCHAR(50),NOT NULL,,"Hành vi: CREATE, UPDATE_RISK, CLOSE_FINDING, APPROVE_REPORT",Hệ thống tự động ghi,Truy vết an ninh 24/7
+31,AUDIT,bks_system_audit_logs,changes_payload,JSONB,NOT NULL,,Dữ liệu trước và sau khi thay đổi (Old Value -> New Value),Hệ thống tự động ghi,Mã hóa bảo mật toàn vẹn
