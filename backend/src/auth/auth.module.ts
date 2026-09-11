@@ -10,7 +10,7 @@ import { JwtModule } from '@nestjs/jwt';
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: process.env.JWT_SECRET || 'super-secret',
-      signOptions: { expiresIn: '15m' }, // 15 phút idle timeout theo yêu cầu
+      signOptions: { expiresIn: '8h' }, // 8 giờ làm việc
     }),
   ],
   providers: [AuthService],

@@ -18,9 +18,13 @@ export default function LoginPage() {
     try {
       const res = await api.post('/auth/login', { username: email, password });
       if (res.access_token) {
+        // Lưu vào localStorage cho api.ts dùng
         localStorage.setItem('bks_token', res.access_token);
-        // Cần cài đặt token vào instance API
+        // Lưu vào cookie để middleware Next.js đọc được (bảo vệ route)
+        document.cookie = 'bks_token=' + res.access_token + '; path=/; max-age=28800; SameSite=Lax';
         router.push('/dashboard/risks');
+      } else {
+        alert('Dang nhap that bai. Vui long kiem tra lai thong tin!');
       }
     } catch (err) {
       alert('Đăng nhập thất bại. Sai email hoặc mật khẩu!');
