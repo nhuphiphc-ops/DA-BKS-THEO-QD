@@ -10,6 +10,7 @@ import { UsersModule } from './users/users.module.js';
 import { DocumentsModule } from './documents/documents.module.js';
 import { AuditFindingsModule } from './audit-findings/audit-findings.module.js';
 import { AuditEvidencesModule } from './audit-evidences/audit-evidences.module.js';
+import { ResolutionsModule } from './resolutions/resolutions.module.js';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { AuditEvidencesModule } from './audit-evidences/audit-evidences.module.j
     DocumentsModule,
     AuditFindingsModule,
     AuditEvidencesModule,
+    ResolutionsModule,
   ],
   controllers: [AppController],
   providers: [
