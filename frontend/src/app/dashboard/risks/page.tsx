@@ -86,7 +86,7 @@ export default function RisksPage() {
           <table className="w-full text-left border-collapse">
             <thead>
               <tr className="bg-slate-50 text-slate-500 text-sm uppercase tracking-wider">
-                <th className="p-4 border-b">ID</th>
+                <th className="p-4 border-b">STT</th>
                 <th className="p-4 border-b">Tiêu đề</th>
                 <th className="p-4 border-b">Mô tả rủi ro</th>
                 <th className="p-4 border-b">Mức độ</th>
@@ -99,9 +99,9 @@ export default function RisksPage() {
                   <td colSpan={5} className="p-4 border-b text-center text-slate-500">Chưa có dữ liệu nào trong Database Supabase. Hãy thêm mới!</td>
                 </tr>
               ) : (
-                findings.map((f: any) => (
+                findings.map((f: any, index: number) => (
                   <tr key={f.id} className="hover:bg-slate-50">
-                    <td className="p-4 border-b text-sm text-slate-500">{f.id}</td>
+                    <td className="p-4 border-b text-sm text-slate-500 text-center font-medium">{index + 1}</td>
                     <td className="p-4 border-b font-medium">{f.title}</td>
                     <td className="p-4 border-b">{f.description}</td>
                     <td className="p-4 border-b">
