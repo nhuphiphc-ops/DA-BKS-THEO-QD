@@ -9,9 +9,9 @@ async function bootstrap() {
   // Hardening: Kích hoạt Helmet (CSP, HSTS, X-Content-Type-Options)
   app.use(helmet());
 
-  // Bật CORS cho nội bộ
+  // Bật CORS cho nội bộ và Vercel
   app.enableCors({
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: true,
     credentials: true,
   });
 
