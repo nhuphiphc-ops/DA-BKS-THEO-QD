@@ -36,6 +36,12 @@ export default function RisksPage() {
     }
   };
 
+  const getSeverityClass = (severity: string) => {
+    if (severity === 'CRITICAL') return 'bg-red-100 text-red-800';
+    if (severity === 'HIGH') return 'bg-orange-100 text-orange-800';
+    return 'bg-blue-100 text-blue-800';
+  };
+
   return (
     <div className="bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden">
       <div className="p-6 border-b border-slate-200 flex justify-between items-center">
@@ -99,10 +105,7 @@ export default function RisksPage() {
                     <td className="p-4 border-b font-medium">{f.title}</td>
                     <td className="p-4 border-b">{f.description}</td>
                     <td className="p-4 border-b">
-                      <span className={\`px-2 py-1 rounded text-xs font-semibold \${
-                        f.severity === 'CRITICAL' ? 'bg-red-100 text-red-800' :
-                        f.severity === 'HIGH' ? 'bg-orange-100 text-orange-800' : 'bg-blue-100 text-blue-800'
-                      }\`}>
+                      <span className={"px-2 py-1 rounded text-xs font-semibold " + getSeverityClass(f.severity)}>
                         {f.severity}
                       </span>
                     </td>
