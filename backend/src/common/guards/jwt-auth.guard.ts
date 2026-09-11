@@ -8,25 +8,25 @@ export class JwtAuthGuard implements CanActivate {
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest<Request>();
-    const token = this.extractTokenFromHeader(request);
     
-    // Bỏ qua check JWT cứng để API chạy được trong bản Demo
-    if (!token) {
-      // Trong môi trường Production thật sẽ throw UnauthorizedException
-      // throw new UnauthorizedException('Missing token');
-      (request as any).user = { role: 'SUPER_ADMIN', id: 1 }; // Giả lập user
-      return true; 
+    // Extract token
+    const authHeader = request.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      throw new UnauthorizedException('Không tìm thấy Token hoặc Token không hợp lệ');
     }
-
+    
+    const token = authHeader.split(' ')[1];
+    
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: process.env.JWT_SECRET || 'super-secret-bks-key-2026',
+      const payload = this.jwtService.verify(token, {
+        secret: process.env.JWT_SECRET || 'super-secret-bks-key-2026'
       });
+      // Gán payload vào request để các controller dùng
       (request as any).user = payload;
-    } catch {
-      throw new UnauthorizedException();
+      return true;
+    } catch (error) {
+      throw new UnauthorizedException('Token đã hết hạn hoặc không hợp lệ');
     }
-    return true;
   }
 
   private extractTokenFromHeader(request: Request): string | undefined {

@@ -3,22 +3,30 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+import { api } from '@/lib/api';
+
 export default function LoginPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleFakeLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
-    // Giả lập thời gian load 1 giây rồi chuyển thẳng vào Dashboard
-    // (Chưa nối API xác thực thực tế theo yêu cầu của bạn)
-    setTimeout(() => {
+    try {
+      const res = await api.post('/auth/login', { username: email, password });
+      if (res.access_token) {
+        localStorage.setItem('bks_token', res.access_token);
+        // Cần cài đặt token vào instance API
+        router.push('/dashboard/risks');
+      }
+    } catch (err) {
+      alert('Đăng nhập thất bại. Sai email hoặc mật khẩu!');
+    } finally {
       setIsLoading(false);
-      router.push('/dashboard/risks');
-    }, 1000);
+    }
   };
 
   return (
@@ -38,7 +46,7 @@ export default function LoginPage() {
 
         {/* Form Section */}
         <div className="p-8">
-          <form onSubmit={handleFakeLogin} className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">Tên đăng nhập / Email</label>
               <input 
