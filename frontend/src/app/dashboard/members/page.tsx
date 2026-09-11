@@ -75,8 +75,8 @@ export default function MembersPage() {
       await api.post('/users', form);
       setForm({ email: '', full_name: '', password: '', role: 'AUDIT_TARGET' });
       fetchMembers();
-    } catch {
-      setFormError('Lỗi! Email có thể đã tồn tại hoặc mật khẩu không hợp lệ.');
+    } catch (err: any) {
+      setFormError(err.message || 'Lỗi không xác định từ máy chủ.');
     } finally {
       setSubmitting(false);
     }

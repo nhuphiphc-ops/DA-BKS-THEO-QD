@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param, UseGuards, HttpCode, ConflictException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserRole } from './entities/user.entity.js';
@@ -36,7 +36,11 @@ export class UsersController {
     // Kiểm tra email trùng
     const existing = await this.usersRepository.findOne({ where: { email: body.email } });
     if (existing) {
-      throw new Error('Email đã tồn tại trong hệ thống!');
+      throw new ConflictException('Email "' + body.email + '" đã tồn tại trong hệ thống!');
+    }
+
+    if (!body.password || body.password.length < 6) {
+      throw new BadRequestException('Mật khẩu phải có ít nhất 6 ký tự!');
     }
 
     const salt = await bcrypt.genSalt(10);
