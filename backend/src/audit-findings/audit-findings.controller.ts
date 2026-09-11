@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Delete, Put } from '@nestjs/common';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -63,5 +63,27 @@ export class AuditFindingsController {
   async remove(@Param('id') id: string) {
     await this.auditFindingsRepository.delete(id);
     return { success: true };
+  }
+
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() updateDto: any) {
+    const finding = await this.auditFindingsRepository.findOneBy({ id });
+    if (!finding) throw new Error('Not found');
+
+    if (updateDto.title) finding.title = updateDto.title;
+    if (updateDto.description) finding.description_encrypted = Buffer.from(updateDto.description);
+    
+    if (updateDto.severity) {
+      const severityMap: any = {
+        'CRITICAL': RiskLevel.NGHIEM_TRONG,
+        'HIGH': RiskLevel.CAO,
+        'MEDIUM': RiskLevel.TRUNG_BINH,
+        'LOW': RiskLevel.THAP
+      };
+      finding.risk_level = severityMap[updateDto.severity] || RiskLevel.TRUNG_BINH;
+    }
+
+    await this.auditFindingsRepository.save(finding);
+    return finding;
   }
 }

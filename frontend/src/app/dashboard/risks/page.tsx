@@ -7,7 +7,8 @@ export default function RisksPage() {
   const [findings, setFindings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [newRisk, setNewRisk] = useState({ title: '', description: '', severity: 'HIGH' });
+  const [formData, setFormData] = useState({ title: '', description: '', severity: 'HIGH' });
+  const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchFindings();
@@ -27,13 +28,28 @@ export default function RisksPage() {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
-      await api.post('/audit-findings', newRisk);
+      if (editingId) {
+        await api.put('/audit-findings/' + editingId, formData);
+      } else {
+        await api.post('/audit-findings', formData);
+      }
       setShowForm(false);
-      setNewRisk({ title: '', description: '', severity: 'HIGH' });
+      setEditingId(null);
+      setFormData({ title: '', description: '', severity: 'HIGH' });
       fetchFindings(); // reload data
     } catch (err) {
       alert('Lỗi khi lưu rủi ro!');
     }
+  };
+
+  const handleEdit = (finding: any) => {
+    setFormData({
+      title: finding.title,
+      description: finding.description,
+      severity: finding.severity
+    });
+    setEditingId(finding.id);
+    setShowForm(true);
   };
 
   const handleDelete = async (id: string) => {
@@ -69,22 +85,24 @@ export default function RisksPage() {
           <form onSubmit={handleSubmit} className="flex gap-4 items-end">
             <div className="flex-1">
               <label className="block text-sm text-slate-600 mb-1">Mã/Tiêu đề Rủi ro</label>
-              <input required type="text" className="w-full border p-2 rounded" value={newRisk.title} onChange={e => setNewRisk({...newRisk, title: e.target.value})} placeholder="VD: RR-2026-003" />
+              <input required type="text" className="w-full border p-2 rounded" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} placeholder="VD: RR-2026-003" />
             </div>
             <div className="flex-2">
               <label className="block text-sm text-slate-600 mb-1">Mô tả</label>
-              <input required type="text" className="w-full border p-2 rounded" value={newRisk.description} onChange={e => setNewRisk({...newRisk, description: e.target.value})} placeholder="Giao dịch sai thẩm quyền..." />
+              <input required type="text" className="w-full border p-2 rounded" value={formData.description} onChange={e => setFormData({...formData, description: e.target.value})} placeholder="Giao dịch sai thẩm quyền..." />
             </div>
             <div>
               <label className="block text-sm text-slate-600 mb-1">Mức độ</label>
-              <select className="border p-2 rounded" value={newRisk.severity} onChange={e => setNewRisk({...newRisk, severity: e.target.value})}>
+              <select className="border p-2 rounded" value={formData.severity} onChange={e => setFormData({...formData, severity: e.target.value})}>
                 <option value="CRITICAL">Nghiêm trọng</option>
                 <option value="HIGH">Cao</option>
                 <option value="MEDIUM">Trung bình</option>
                 <option value="LOW">Thấp</option>
               </select>
             </div>
-            <button type="submit" className="px-4 py-2 bg-slate-800 text-white rounded font-medium">Lưu vào Database</button>
+            <button type="submit" className="px-4 py-2 bg-slate-800 text-white rounded font-medium">
+              {editingId ? 'Cập nhật' : 'Lưu vào Database'}
+            </button>
           </form>
         </div>
       )}
@@ -122,6 +140,7 @@ export default function RisksPage() {
                     </td>
                     <td className="p-4 border-b font-medium text-slate-500">{f.status}</td>
                     <td className="p-4 border-b">
+                      <button onClick={() => handleEdit(f)} className="text-blue-500 hover:text-blue-700 text-sm font-medium mr-3">Sửa</button>
                       <button onClick={() => handleDelete(f.id)} className="text-red-500 hover:text-red-700 text-sm font-medium">Xóa</button>
                     </td>
                   </tr>
