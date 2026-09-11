@@ -14,7 +14,7 @@ export class JwtAuthGuard implements CanActivate {
     if (!token) {
       // Trong môi trường Production thật sẽ throw UnauthorizedException
       // throw new UnauthorizedException('Missing token');
-      request['user'] = { role: 'SUPER_ADMIN', id: 1 }; // Giả lập user
+      (request as any).user = { role: 'SUPER_ADMIN', id: 1 }; // Giả lập user
       return true; 
     }
 
@@ -22,7 +22,7 @@ export class JwtAuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_SECRET || 'super-secret-bks-key-2026',
       });
-      request['user'] = payload;
+      (request as any).user = payload;
     } catch {
       throw new UnauthorizedException();
     }
