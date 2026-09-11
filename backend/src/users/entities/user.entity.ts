@@ -34,7 +34,7 @@ export class User {
   failed_login_attempts: number;
 
   @Column({ type: 'timestamp with time zone', nullable: true })
-  locked_until: Date;
+  locked_until: Date | null;
 
   @CreateDateColumn({ type: 'timestamp with time zone' })
   created_at: Date;

@@ -4,8 +4,9 @@ import { Repository } from 'typeorm';
 import { User } from '../users/entities/user.entity.js';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import * as otplib from 'otplib';
-const { authenticator } = otplib;
+import { OTP } from 'otplib';
+
+const totp = new OTP({ strategy: 'totp' });
 
 @Injectable()
 export class AuthService {
@@ -54,18 +55,21 @@ export class AuthService {
 
   async login(user: any, mfaCode?: string) {
     const fullUser = await this.usersRepository.findOne({ where: { id: user.id } });
+    if (!fullUser) {
+      throw new UnauthorizedException('Email hoặc mật khẩu không chính xác.');
+    }
 
     // Ràng buộc MFA cho toàn bộ tài khoản BKS
     if (fullUser.mfa_enabled) {
       if (!mfaCode) {
         throw new UnauthorizedException('Yêu cầu nhập mã xác thực MFA (TOTP).');
       }
-      const isMfaValid = authenticator.verify({
+      const mfaResult = await totp.verify({
         token: mfaCode,
         secret: fullUser.mfa_secret,
       });
 
-      if (!isMfaValid) {
+      if (!mfaResult.valid) {
         throw new UnauthorizedException('Mã MFA không hợp lệ.');
       }
     }
@@ -79,8 +83,12 @@ export class AuthService {
   }
 
   async generateTwoFactorAuthenticationSecret(user: User) {
-    const secret = authenticator.generateSecret();
-    const otpauthUrl = authenticator.keyuri(user.email, 'BanKiemSoat_WebApp', secret);
+    const secret = totp.generateSecret();
+    const otpauthUrl = totp.generateURI({
+      issuer: 'BanKiemSoat_WebApp',
+      label: user.email,
+      secret,
+    });
 
     await this.usersRepository.update(user.id, { mfa_secret: secret });
 

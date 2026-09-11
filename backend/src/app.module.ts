@@ -5,7 +5,11 @@ import { ThrottlerModule, ThrottlerGuard } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
-import { User } from './users/entities/user.entity.js';
+import { AuthModule } from './auth/auth.module.js';
+import { UsersModule } from './users/users.module.js';
+import { DocumentsModule } from './documents/documents.module.js';
+import { AuditFindingsModule } from './audit-findings/audit-findings.module.js';
+import { AuditEvidencesModule } from './audit-evidences/audit-evidences.module.js';
 
 @Module({
   imports: [
@@ -21,15 +25,20 @@ import { User } from './users/entities/user.entity.js';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get<string>('DB_HOST'),
-        port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USER'),
-        password: configService.get<string>('DB_PASSWORD'),
-        database: configService.get<string>('DB_NAME'),
-        entities: [User],
+        host: configService.get<string>('DB_HOST') || 'localhost',
+        port: configService.get<number>('DB_PORT') || 5432,
+        username: configService.get<string>('DB_USER') || 'postgres',
+        password: configService.get<string>('DB_PASSWORD') || 'postgres',
+        database: configService.get<string>('DB_NAME') || 'bks_db',
+        autoLoadEntities: true, // Auto load all registered entities!
         synchronize: false,
       }),
     }),
+    AuthModule,
+    UsersModule,
+    DocumentsModule,
+    AuditFindingsModule,
+    AuditEvidencesModule,
   ],
   controllers: [AppController],
   providers: [
