@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, UseGuards, Delete } from '@nestjs/common';
 import { JwtAuthGuard } from '../common/guards/jwt-auth.guard.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -50,12 +50,18 @@ export class AuditFindingsController {
       if (f.risk_level === RiskLevel.THAP) severity = 'LOW';
 
       return {
-        id: f.id.substring(0, 8),
+        id: f.id,
         title: f.title,
         description: f.description_encrypted ? f.description_encrypted.toString() : '',
         severity: severity,
         status: f.action_plan_status
       };
     });
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    await this.auditFindingsRepository.delete(id);
+    return { success: true };
   }
 }

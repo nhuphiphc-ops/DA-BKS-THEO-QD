@@ -36,6 +36,16 @@ export default function RisksPage() {
     }
   };
 
+  const handleDelete = async (id: string) => {
+    if (!confirm('Bạn có chắc chắn muốn xóa rủi ro này?')) return;
+    try {
+      await api.delete('/audit-findings/' + id);
+      fetchFindings();
+    } catch (err) {
+      alert('Lỗi khi xóa!');
+    }
+  };
+
   const getSeverityClass = (severity: string) => {
     if (severity === 'CRITICAL') return 'bg-red-100 text-red-800';
     if (severity === 'HIGH') return 'bg-orange-100 text-orange-800';
@@ -91,12 +101,13 @@ export default function RisksPage() {
                 <th className="p-4 border-b">Mô tả rủi ro</th>
                 <th className="p-4 border-b">Mức độ</th>
                 <th className="p-4 border-b">Trạng thái</th>
+                <th className="p-4 border-b">Hành động</th>
               </tr>
             </thead>
             <tbody className="text-slate-700">
               {findings.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="p-4 border-b text-center text-slate-500">Chưa có dữ liệu nào trong Database Supabase. Hãy thêm mới!</td>
+                  <td colSpan={6} className="p-4 border-b text-center text-slate-500">Chưa có dữ liệu nào trong Database Supabase. Hãy thêm mới!</td>
                 </tr>
               ) : (
                 findings.map((f: any, index: number) => (
@@ -110,6 +121,9 @@ export default function RisksPage() {
                       </span>
                     </td>
                     <td className="p-4 border-b font-medium text-slate-500">{f.status}</td>
+                    <td className="p-4 border-b">
+                      <button onClick={() => handleDelete(f.id)} className="text-red-500 hover:text-red-700 text-sm font-medium">Xóa</button>
+                    </td>
                   </tr>
                 ))
               )}
