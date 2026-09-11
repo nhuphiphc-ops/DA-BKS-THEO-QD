@@ -9,6 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
   imports: [
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
+      global: true,
       secret: process.env.JWT_SECRET || 'super-secret',
       signOptions: { expiresIn: '15m' }, // 15 phút idle timeout theo yêu cầu
     }),
