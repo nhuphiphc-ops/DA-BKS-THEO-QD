@@ -11,6 +11,7 @@ export default function Sidebar({ userRole }: { userRole: string }) {
     { name: 'Kế hoạch & Nghị quyết', href: '/dashboard/plans', roles: ['SUPER_ADMIN', 'AUDITOR'] },
     { name: 'Thu thập Hồ sơ', href: '/dashboard/evidences', roles: ['SUPER_ADMIN', 'AUDITOR', 'AUDIT_TARGET'] },
     { name: 'Quản lý Rủi ro', href: '/dashboard/risks', roles: ['SUPER_ADMIN', 'AUDITOR', 'AUDIT_TARGET'] },
+    { name: 'Quản lý Thiết bị (ECONS)', href: '/dashboard/equipment', roles: ['SUPER_ADMIN', 'AUDITOR', 'SYSTEM_ADMIN', 'AUDIT_TARGET'] },
     { name: 'Quản lý Thành viên', href: '/dashboard/members', roles: ['SUPER_ADMIN', 'SYSTEM_ADMIN'] },
     { name: 'Audit Logs (WORM)', href: '/dashboard/audit-logs', roles: ['SYSTEM_ADMIN'] },
   ];
