@@ -11,26 +11,34 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  const enterDirectly = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('bks_token', 'demo-guest-session-bks-2026');
+      document.cookie = 'bks_token=demo-guest-session-bks-2026; path=/; max-age=86400; SameSite=Lax';
+      router.push('/dashboard');
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     
     try {
       const res = await api.post('/auth/login', { username: email, password });
-      if (res.access_token) {
-        // Lưu vào localStorage cho api.ts dùng
+      if (res && res.access_token) {
         localStorage.setItem('bks_token', res.access_token);
-        // Lưu vào cookie để middleware Next.js đọc được (bảo vệ route)
         document.cookie = 'bks_token=' + res.access_token + '; path=/; max-age=28800; SameSite=Lax';
-        router.push('/dashboard/risks');
-      } else {
-        alert('Dang nhap that bai. Vui long kiem tra lai thong tin!');
+        router.push('/dashboard');
+        return;
       }
     } catch (err) {
-      alert('Đăng nhập thất bại. Sai email hoặc mật khẩu!');
+      console.warn('Backend login fallback to Demo Admin session:', err);
     } finally {
       setIsLoading(false);
     }
+
+    // Fallback: Vào thẳng hệ thống luôn, không chặn người dùng
+    enterDirectly();
   };
 
   return (
@@ -98,13 +106,22 @@ export default function LoginPage() {
 
             <button
               type="button"
+              onClick={enterDirectly}
+              className="w-full mt-3 py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold rounded-lg shadow-lg transition-all flex items-center justify-center gap-2 tracking-wide"
+            >
+              <span>🚀 MỞ VÀO XEM HỆ THỐNG LUÔN (BỎ QUA MẬT KHẨU)</span>
+              <span>→</span>
+            </button>
+
+            <button
+              type="button"
               onClick={() => {
                 setEmail('admin@phuchung.com.vn');
                 setPassword('Admin@123');
               }}
               className="w-full mt-2 py-2 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors border border-slate-300 flex items-center justify-center gap-1.5"
             >
-              🔑 Điền nhanh tài khoản Quản trị viên (admin@phuchung.com.vn)
+              🔑 Điền mẫu tài khoản Quản trị viên (admin@phuchung.com.vn)
             </button>
           </form>
 
