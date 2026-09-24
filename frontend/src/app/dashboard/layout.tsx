@@ -1,6 +1,8 @@
 import Sidebar from '@/components/layout/Sidebar';
 import { ReactNode } from 'react';
 
+import HeaderNav from '@/components/layout/HeaderNav';
+
 // Giả lập lấy User Role từ JWT cookie/session trên server-side
 const MOCK_USER_ROLE = 'SUPER_ADMIN'; 
 
@@ -11,10 +13,8 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <main className="flex-1 flex flex-col overflow-hidden">
         <header className="h-16 bg-white border-b border-slate-200 flex items-center px-8 shadow-sm">
           <h1 className="text-xl font-semibold text-slate-800">Trung tâm Giám sát Điều hành</h1>
-          <div className="ml-auto flex items-center space-x-4">
-            <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium border border-green-200">
-              ✓ MFA Active
-            </span>
+          <div className="ml-auto">
+            <HeaderNav />
           </div>
         </header>
         <div className="flex-1 overflow-auto p-8">

@@ -95,6 +95,17 @@ export default function LoginPage() {
                 </svg>
               ) : 'Xác thực & Đăng nhập'}
             </button>
+
+            <button
+              type="button"
+              onClick={() => {
+                setEmail('admin@phuchung.com.vn');
+                setPassword('Admin@123');
+              }}
+              className="w-full mt-2 py-2 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold rounded-lg transition-colors border border-slate-300 flex items-center justify-center gap-1.5"
+            >
+              🔑 Điền nhanh tài khoản Quản trị viên (admin@phuchung.com.vn)
+            </button>
           </form>
 
           <div className="mt-8 text-center text-xs text-slate-500">

@@ -110,7 +110,7 @@ export default function PlansPage() {
               <select className="border p-2 rounded" value={formData.compliance_status} onChange={e => setFormData({...formData, compliance_status: e.target.value})}>
                 <option value="DUNG_THAM_QUYEN">ĐÚNG THẨM QUYỀN</option>
                 <option value="DANG_THUC_HIEN">ĐANG THỰC HIỆN</option>
-                <option value="VI_PHAM">VỊ PHẠM</option>
+                <option value="VI_PHAM">VI PHẠM</option>
               </select>
             </div>
             <button type="submit" className="px-4 py-2 bg-slate-800 text-white rounded font-medium">

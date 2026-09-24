@@ -1,0 +1,3042 @@
+{
+  "overview": {
+    "Bien dong": [
+      [
+        "BIẾN ĐỘNG NHẬP / XUẤT",
+        null,
+        null,
+        null
+      ],
+      [
+        "01/01/2026 – 24/09/2026 · gộp theo tháng · Kho: Tất cả kho (65)",
+        null,
+        null,
+        null
+      ],
+      [
+        "Mốc",
+        "Nhập",
+        "Xuất",
+        "Chênh lệch"
+      ],
+      [
+        "01/2026",
+        265840.067,
+        137013.06699999998,
+        128827
+      ],
+      [
+        "02/2026",
+        28523.833,
+        28612.833,
+        -89
+      ],
+      [
+        "03/2026",
+        123071.2,
+        110586.2,
+        12485
+      ],
+      [
+        "04/2026",
+        282147.2,
+        227836.20000000004,
+        54310.99999999997
+      ],
+      [
+        "05/2026",
+        1406964.7439999997,
+        87991.5,
+        1318973.2439999997
+      ],
+      [
+        "06/2026",
+        884865.0399999997,
+        410731.6,
+        474133.4399999997
+      ],
+      [
+        "07/2026",
+        239845,
+        107846,
+        131999
+      ],
+      [
+        "08/2026",
+        389301.5,
+        239420.5,
+        149881
+      ],
+      [
+        "09/2026",
+        22192,
+        31424,
+        -9232
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null
+      ]
+    ],
+    "Phan bo kho": [
+      [
+        "PHÂN BỔ TỒN THEO KHO",
+        null,
+        null,
+        null
+      ],
+      [
+        "Tồn hiện tại · Kho: Tất cả kho (65)",
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Kho",
+        "Số lượng",
+        "Tỷ trọng"
+      ],
+      [
+        1,
+        "Econs.Kho thiết bị lương Sơn",
+        321920.4,
+        13.392871830221075
+      ],
+      [
+        2,
+        "PHC - PĐB Thái Nguyên",
+        305915.4,
+        12.727014948697917
+      ],
+      [
+        3,
+        "PHC - Tự Lập (Phú Thọ)",
+        262043.8,
+        10.901822398655337
+      ],
+      [
+        4,
+        "PHC - HH2 Gamuda",
+        258700,
+        10.762710106219401
+      ],
+      [
+        5,
+        "PHC - LANCOM Đà nẵng",
+        221953.22999999998,
+        9.233932244410665
+      ],
+      [
+        6,
+        "32 kho khác",
+        1033136.8539999999,
+        42.98164847179559
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null
+      ]
+    ],
+    "Dang o dau": [
+      [
+        "THIẾT BỊ ĐANG Ở ĐÂU",
+        null,
+        null
+      ],
+      [
+        "Tồn hiện tại · Kho: Tất cả kho (65)",
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Dự án / bên thuê",
+        "Số lượng"
+      ],
+      [
+        1,
+        "Công ty cổ phần xây dựng Phục Hưng Holdings",
+        924596.617
+      ],
+      [
+        2,
+        "Thái Nguyên Phố đi bộ",
+        305915.4
+      ],
+      [
+        3,
+        "Chung cư HH2 - Gamuda",
+        258700
+      ],
+      [
+        4,
+        "oasis Quy Nhơn",
+        156463
+      ],
+      [
+        5,
+        "Nằm kho, chưa điều động",
+        321920.4
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null
+      ]
+    ],
+    "Tinh trang": [
+      [
+        "TÌNH TRẠNG THIẾT BỊ",
+        null,
+        null,
+        null
+      ],
+      [
+        "Tồn hiện tại · Kho: Tất cả kho (65)",
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Tình trạng",
+        "Số lượng",
+        "Tỷ trọng"
+      ],
+      [
+        1,
+        "Tốt",
+        2247370.7739999997,
+        93.49748798512533
+      ],
+      [
+        2,
+        "Hỏng",
+        156298.91,
+        6.50251201487467
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null
+      ]
+    ],
+    "Top vat tu": [
+      [
+        "TOP VẬT TƯ LUÂN CHUYỂN",
+        null,
+        null,
+        null
+      ],
+      [
+        "01/01/2026 – 24/09/2026 · gộp theo tháng · Kho: Tất cả kho (65)",
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Mã VT",
+        "Tên",
+        "Lượt luân chuyển"
+      ],
+      [
+        1,
+        "RL0005",
+        "Giằng giáo Ringlock D42x1200x2mm",
+        809752
+      ],
+      [
+        2,
+        "ALPK.WP",
+        "WEDGE PIN (CHỐT DẸT) (47 con/1kg)",
+        448628
+      ],
+      [
+        3,
+        "ALPK.RP",
+        "ROUND PIN (CHỐT NGẮN) (19con/1kg)",
+        433160
+      ],
+      [
+        4,
+        "THMK50X50.06",
+        "Thép hộp mạ kẽm 50x50x1.8mm (thép vụn phi quy cách)",
+        275096.93
+      ],
+      [
+        5,
+        "TBAT0001",
+        "Khóa giáo xoay D48",
+        222549
+      ],
+      [
+        6,
+        "THMK50X50.02",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=3m",
+        196537
+      ]
+    ]
+  },
+  "heavy_equipment": [
+    [
+      "TỔNG HỢP THEO DÕI THIẾT BỊ LỚN",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "Tính đến ngày 24/09/2026",
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null
+    ],
+    [
+      "STT",
+      "Mã thiết bị",
+      "Tên thiết bị",
+      "Nguyên giá",
+      "Ngày sử dụng",
+      "Hết khấu hao",
+      "Vị trí",
+      "Nguồn vị trí",
+      "Trạng thái",
+      "Chi phí BD/SC",
+      "Khấu hao lũy kế",
+      "Giá trị còn lại",
+      "Tổng tiền đã bỏ"
+    ],
+    [
+      "",
+      "Cẩu tháp và các phụ kiện · 36 thiết bị",
+      "",
+      28552754899,
+      "",
+      "",
+      "",
+      "",
+      "",
+      1677740000,
+      2932754268.6619043,
+      25620000630.338097,
+      30230494899
+    ],
+    [
+      1,
+      "CT5513.01",
+      "Cẩu tháp SQ5513 số seri 20160259",
+      179180760,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - KS Hà Thành",
+      "nhập tay",
+      "Đang dùng",
+      16100000,
+      44795190,
+      134385570,
+      195280760
+    ],
+    [
+      2,
+      "CT6013.01",
+      "Cẩu tháp TC6013-6 số seri 6007",
+      236518396,
+      "23/12/2025",
+      "23/12/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "theo phiếu kho",
+      "Đang dùng",
+      14700000,
+      59129599,
+      177388797,
+      251218396
+    ],
+    [
+      3,
+      "CT6013.02",
+      "Cẩu tháp TC6013-6 số seri 166009",
+      236518396,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - Sun Hà Nam (CC04-CC06)",
+      "nhập tay",
+      "Đang dùng",
+      10900000,
+      59129599,
+      177388797,
+      247418396
+    ],
+    [
+      4,
+      "CT6013.03",
+      "Cẩu tháp TC6013-6 số seri 6011",
+      236518396,
+      "23/12/2025",
+      "23/12/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      14300000,
+      59129599,
+      177388797,
+      250818396
+    ],
+    [
+      5,
+      "CT6013.04",
+      "Cẩu tháp TC6013-6 số seri 6012",
+      236518396,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - Eurowindow Vinh",
+      "nhập tay",
+      "Đang dùng",
+      11600000,
+      59129599,
+      177388797,
+      248118396
+    ],
+    [
+      6,
+      "CT6013.05",
+      "Cẩu tháp TC6013-6 số seri 6013",
+      236518396,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - KĐT Nghi Kim",
+      "nhập tay",
+      "Đang dùng",
+      14500000,
+      59129599,
+      177388797,
+      251018396
+    ],
+    [
+      7,
+      "CT6024.01",
+      "Cẩu tháp QTZ160- TC6024 số seri DH20160826-1",
+      501705736,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - PHENIKA",
+      "nhập tay",
+      "Đang dùng",
+      35900000,
+      125426434,
+      376279302,
+      537605736
+    ],
+    [
+      8,
+      "CT6024.02",
+      "Cẩu tháp QTZ160- TC6024 số seri DH20160826-2",
+      501705736,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - Eurowindow Vinh",
+      "nhập tay",
+      "Đang dùng",
+      43840000,
+      125426434,
+      376279302,
+      545545736
+    ],
+    [
+      9,
+      "CT7020.01",
+      "Cẩu tháp XCMG XGT7020-10S1",
+      2300000000,
+      "25/12/2022",
+      "25/12/2029",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      96900000,
+      1204761904.7619047,
+      1095238095.2380953,
+      2396900000
+    ],
+    [
+      10,
+      "CT7021B.01",
+      "Cẩu tháp QTP7021-01 số seri 2999",
+      3972101860,
+      "15/05/2026",
+      "15/05/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      218600000,
+      132403395.33333333,
+      3839698464.6666665,
+      4190701860
+    ],
+    [
+      11,
+      "CT7021B.02",
+      "Cẩu tháp QTP7021-02 số seri 3000",
+      3388604314,
+      "25/05/2026",
+      "25/05/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      194100000,
+      84715107.85,
+      3303889206.15,
+      3582704314
+    ],
+    [
+      12,
+      "CT7021B.03",
+      "Cẩu tháp QTP7021-03 số seri 3001",
+      3388604314,
+      "22/05/2026",
+      "22/05/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      227700000,
+      112953477.13333334,
+      3275650836.866667,
+      3616304314
+    ],
+    [
+      13,
+      "CT7026.01",
+      "Cẩu tháp XCMG TCT7026-12S1",
+      1810000000,
+      "28/11/2024",
+      "28/11/2032",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      60600000,
+      395937500,
+      1414062500,
+      1870600000
+    ],
+    [
+      14,
+      "CT7527.01",
+      "Cẩu tháp QTP7527-01 số seri 3002",
+      3969378874,
+      "23/04/2026",
+      "23/04/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      271700000,
+      165390786.41666666,
+      3803988087.5833335,
+      4241078874
+    ],
+    [
+      15,
+      "CT7527.02",
+      "Cẩu tháp QTP7527-02 số seri 3003",
+      3387223231,
+      "05/05/2026",
+      "05/05/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      219600000,
+      112907441.03333333,
+      3274315789.9666667,
+      3606823231
+    ],
+    [
+      16,
+      "CT7527.03",
+      "Cẩu tháp QTP7527-03 số seri 3005",
+      3971658094,
+      "11/05/2026",
+      "11/05/2036",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      226700000,
+      132388603.13333334,
+      3839269490.866667,
+      4198358094
+    ],
+    [
+      17,
+      "TN.BVT.ZTT7530",
+      "Cẩu tháp ZTT 7530-16 (BV Tim Hà Nội CS2, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      18,
+      "TN.CT01.JCD260",
+      "Cẩu tháp Luffing SCDC JCD 260 (CT01 — Tuyên Sơn, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - LANCOM Đà nẵng",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      19,
+      "TN.CT02.ZTL146",
+      "Cẩu tháp Luffing ZTL 146-10A (CT02 — Tuyên Sơn, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - LANCOM Đà nẵng",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      20,
+      "TN.DN.CT7020",
+      "Cẩu tháp 7020-12 đầu bằng (KĐT Đông Nam Việt Trì, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Tự Lập (Phú Thọ)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      21,
+      "TN.DN.NTP7030",
+      "Cẩu tháp NTP 7030-16 đầu chóp (KĐT Đông Nam Việt Trì, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Tự Lập (Phú Thọ)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      22,
+      "TN.EU.KD.CT01",
+      "Cẩu tháp QTZ6513-6 (CT01 — EU Vinh, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      23,
+      "TN.EU.KD.CT02",
+      "Cẩu tháp QTZ6513-6 (CT02 — EU Vinh, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      24,
+      "TN.EU.TV.TCT6012",
+      "Cẩu tháp TCT 6012 (TC01 — EU Vinh, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Eurowindow Vinh",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      25,
+      "TN.KP.MR150",
+      "Cẩu tháp MR 150 Potain (Pháp) — King Palace, thuê ngoài",
+      0,
+      "—",
+      "—",
+      "PHC - 108 Nguyễn Trãi",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      26,
+      "TN.SUN.MH01",
+      "Cẩu tháp 6015-8 số 01 (Sun Hà Nam, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Sun Hà Nam 2 (CC20-CC21)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      27,
+      "TN.SUN.MH02",
+      "Cẩu tháp 6015-8 số 02 (Sun Hà Nam, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Sun Hà Nam 2 (CC20-CC21)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      28,
+      "TN.SUN.TC03.QTZ6513",
+      "Cẩu tháp QTZ 6513-8 (TC03 — Sun Hà Nam, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      29,
+      "TN.TAS.TC01",
+      "Cẩu tháp Model 7020-12 (TC01 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      30,
+      "TN.TAS.TC02",
+      "Cẩu tháp Model 6513-8 (TC02 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      31,
+      "TN.TAS.TC03",
+      "Cẩu tháp Model 7525-16 (TC03 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      32,
+      "TN.TAS.TC04",
+      "Cẩu tháp Model 6513-8 (TC04 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      33,
+      "TN.TAS.TC05",
+      "Cẩu tháp Model 7525-16 (TC05 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      34,
+      "TN.TAS.TC06",
+      "Cẩu tháp Model 7020-12 (TC06 — TASECO Thái Nguyên, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - PĐB Thái Nguyên",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      35,
+      "TN.VS.NL.T7020",
+      "Cẩu tháp ZOOMLION T7020-10E (BV VietSing, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      36,
+      "TN.VS.TC.Q6015A",
+      "Cần trục tháp Q6015A (BV VietSing, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - DA BV Viet Sing",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      "",
+      "Công cụ dụng cụ cầm tay các loại · 2 thiết bị",
+      "",
+      113500000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      0,
+      98775000,
+      14725000,
+      113500000
+    ],
+    [
+      37,
+      "CCCAMTAY0004",
+      "Máy nén khí Puma 15HP 11kw(CT4)",
+      48400000,
+      "30/04/2016",
+      "30/04/2019",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      48400000,
+      0,
+      48400000
+    ],
+    [
+      38,
+      "CCCAMTAY0008",
+      "Máy nén khí Hitachi 37KW",
+      65100000,
+      "01/04/2021",
+      "01/04/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      50375000,
+      14725000,
+      65100000
+    ],
+    [
+      "",
+      "Máy bắn nước cao áp các loại · 4 thiết bị",
+      "",
+      123900000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      0,
+      113575000,
+      10325000,
+      123900000
+    ],
+    [
+      39,
+      "BOMCAP0001",
+      "Máy bắn nước cao áp V-Jet VJ300/21",
+      39900000,
+      "01/04/2020",
+      "01/04/2027",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      36575000,
+      3325000,
+      39900000
+    ],
+    [
+      40,
+      "BOMCAP0002",
+      "Máy bắn nước cao áp V-Jet VJ500/21",
+      84000000,
+      "01/04/2020",
+      "01/04/2027",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      77000000,
+      7000000,
+      84000000
+    ],
+    [
+      41,
+      "BOMCAP0003",
+      "Máy bắn nước cao áp V-Jet VJ250/7.5",
+      0,
+      "—",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      42,
+      "BOMCAP0004",
+      "Máy xịt áp lực 10HP - 7.5Kw",
+      0,
+      "—",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      "",
+      "Máy nắn thẳng ống · 1 thiết bị",
+      "",
+      112500000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      0,
+      0,
+      112500000,
+      112500000
+    ],
+    [
+      43,
+      "MNTO-XJ8",
+      "Máy nắn thẳng ống XJ - 8",
+      112500000,
+      "19/11/2024",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      0,
+      112500000,
+      112500000
+    ],
+    [
+      "",
+      "Máy Phát điện · 3 thiết bị",
+      "",
+      150000000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      14600000,
+      150000000,
+      0,
+      164600000
+    ],
+    [
+      44,
+      "MAYPD0001",
+      "Máy phát điện 250KVA Denyo DCA-250ES",
+      0,
+      "—",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      4300000,
+      0,
+      0,
+      4300000
+    ],
+    [
+      45,
+      "MAYPD0002",
+      "Máy phát điện 350 kVA - AV350/VN",
+      0,
+      "—",
+      "—",
+      "PHC - HH2 Gamuda",
+      "nhập tay",
+      "Đang dùng",
+      3300000,
+      0,
+      0,
+      3300000
+    ],
+    [
+      46,
+      "MAYPD0003",
+      "Máy phát điện 250KVA CUMMINS NT 855-GS4",
+      150000000,
+      "10/12/2018",
+      "10/12/2023",
+      "Econs.Kho thiết bị lương Sơn",
+      "theo phiếu kho",
+      "Đang dùng",
+      7000000,
+      150000000,
+      0,
+      157000000
+    ],
+    [
+      "",
+      "Máy phun cát · 1 thiết bị",
+      "",
+      35200000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      0,
+      35200000,
+      0,
+      35200000
+    ],
+    [
+      47,
+      "MMCL0003",
+      "Máy phun cát ướt",
+      35200000,
+      "01/01/2021",
+      "01/01/2024",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      35200000,
+      0,
+      35200000
+    ],
+    [
+      "",
+      "Vận thăng và các phụ kiện · 16 thiết bị",
+      "",
+      2769461532,
+      "",
+      "",
+      "",
+      "",
+      "",
+      187400000,
+      441146539.26666665,
+      2328314992.733333,
+      2956861532
+    ],
+    [
+      48,
+      "TN.DN.VT1",
+      "Vận thăng lồng đôi TW 2,0 tấn/lồng — VT1 (KĐT Đông Nam Việt Trì, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      49,
+      "TN.DN.VT2",
+      "Vận thăng lồng đôi TW 2,0 tấn/lồng — VT2 (KĐT Đông Nam Việt Trì, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      50,
+      "TN.MIK.VT.V11",
+      "Vận thăng lồng đôi TW-SC200/200G số seri 030536021 — tòa V11 (MIK V, thuê CMS Hòa Bình)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      51,
+      "TN.MIK.VT.V12",
+      "Vận thăng lồng đôi TW-SC200/200G số seri 230739055 — tòa V12 (MIK V, thuê CMS Hòa Bình)",
+      0,
+      "—",
+      "—",
+      "",
+      "",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      52,
+      "TN.SUN.VT1.TW",
+      "Vận thăng lồng đôi TW 2,0 tấn/lồng — VT1 (Sun Hà Nam, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Sun Hà Nam (CC04-CC06)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      53,
+      "TN.SUN.VT2.TW",
+      "Vận thăng lồng đôi TW 2,0 tấn/lồng — VT2 (Sun Hà Nam, thuê ngoài)",
+      0,
+      "—",
+      "—",
+      "PHC - Sun Hà Nam (CC04-CC06)",
+      "theo phiếu kho",
+      "Đang dùng",
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      54,
+      "VT0001",
+      "Vận thăng lồng đôi GJJ-SC200/200GD số seri 151219074",
+      189931552,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - BV TIM HN CS2",
+      "nhập tay",
+      "Đang dùng",
+      14300000,
+      47482888,
+      142448664,
+      204231552
+    ],
+    [
+      55,
+      "VT0002",
+      "Vận thăng lồng đôi GJJ- SC200/200GD số seri 151219075",
+      189931552,
+      "23/12/2025",
+      "23/12/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      13000000,
+      47482888,
+      142448664,
+      202931552
+    ],
+    [
+      56,
+      "VT0003",
+      "Vận thăng lồng đôi GJJ-SC200/200GD số seri 160719505",
+      170221558,
+      "23/12/2025",
+      "23/12/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      10700000,
+      42555389.5,
+      127666168.5,
+      180921558
+    ],
+    [
+      57,
+      "VT0004",
+      "Vận thăng lồng đôi GJJ-SC200/200GD số seri 160719506",
+      170221558,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - KS Hà Thành",
+      "nhập tay",
+      "Đang dùng",
+      10200000,
+      42555389.5,
+      127666168.5,
+      180421558
+    ],
+    [
+      58,
+      "VT0005",
+      "Vận thăng lồng đôi ZOOMLION-SC200/200EB số 3014SC01600731-1",
+      225767604,
+      "23/12/2025",
+      "23/12/2028",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      9800000,
+      56441901,
+      169325703,
+      235567604
+    ],
+    [
+      59,
+      "VT0006",
+      "Vận thăng lồng đôi ZOOMLION-SC200/200EB số 3014SC01700408-1",
+      225767604,
+      "23/12/2025",
+      "23/12/2028",
+      "PHC - KS Hà Thành",
+      "nhập tay",
+      "Đang dùng",
+      14900000,
+      56441901,
+      169325703,
+      240667604
+    ],
+    [
+      60,
+      "VT0007",
+      "Vận thăng lồng đôi ZOOMLION-SC200/200EB số 3014SC01700409-1",
+      225767604,
+      "23/12/2025",
+      "23/12/2030",
+      "PHC - PHENIKA",
+      "nhập tay",
+      "Đang dùng",
+      14300000,
+      33865140.6,
+      191902463.4,
+      240067604
+    ],
+    [
+      61,
+      "VT0008",
+      "Vận thăng lồng đôi TW- SC200/200G-số seri 220431581",
+      685926250,
+      "23/12/2025",
+      "23/12/2034",
+      "PHC - MIK Victoria",
+      "nhập tay",
+      "Đang dùng",
+      55100000,
+      57160520.833333336,
+      628765729.1666666,
+      741026250
+    ],
+    [
+      62,
+      "VT0009",
+      "Vận thăng lồng đôi TW- SC200/200G-số seri 220531611",
+      685926250,
+      "23/12/2025",
+      "23/12/2034",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      33300000,
+      57160520.833333336,
+      628765729.1666666,
+      719226250
+    ],
+    [
+      63,
+      "VT0010",
+      "Vận thăng nâng hàng 1000Kgx27m",
+      0,
+      "—",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      11800000,
+      0,
+      0,
+      11800000
+    ],
+    [
+      "",
+      "Xe cẩu tự hành · 1 thiết bị",
+      "",
+      2075000000,
+      "",
+      "",
+      "",
+      "",
+      "",
+      0,
+      2075000000,
+      0,
+      2075000000
+    ],
+    [
+      64,
+      "XECAU-29C-88230",
+      "Xe cẩu tự hành HUYNDAI 29C-88230",
+      2075000000,
+      "10/02/2018",
+      "10/02/2025",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      0,
+      2075000000,
+      0,
+      2075000000
+    ],
+    [
+      "",
+      "Xe nâng chạy dầu các loại · 3 thiết bị",
+      "",
+      142272727,
+      "",
+      "",
+      "",
+      "",
+      "",
+      20000000,
+      130416666.41666666,
+      11856060.583333336,
+      162272727
+    ],
+    [
+      65,
+      "XENANGDAU0001",
+      "Xe nâng hàng TMC - F67-00217 - Số 1",
+      53181818,
+      "01/04/2020",
+      "01/04/2027",
+      "Econs.Kho thiết bị lương Sơn",
+      "theo phiếu kho",
+      "Đang dùng",
+      5800000,
+      48749999.833333336,
+      4431818.166666664,
+      58981818
+    ],
+    [
+      66,
+      "XENANGDAU0002",
+      "Xe nâng hàng Nisan NY1F2A25-NY1F2000464 - số 6",
+      89090909,
+      "01/04/2020",
+      "01/04/2027",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      9100000,
+      81666666.58333333,
+      7424242.416666672,
+      98190909
+    ],
+    [
+      67,
+      "XENANGDAU0003",
+      "Xe nâng hàng 2.5 tấn 11FD25PAX98D - D2L00258 (Sumitomo)",
+      0,
+      "—",
+      "—",
+      "Econs.Kho thiết bị lương Sơn",
+      "nhập tay",
+      "Đang dùng",
+      5100000,
+      0,
+      0,
+      5100000
+    ]
+  ],
+  "gamuda_summary": {
+    "Tổng hợp": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null
+      ],
+      [
+        "TỔNG HỢP BẢNG KÊ THEO DỰ ÁN",
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null
+      ],
+      [
+        "Khoản mục",
+        "Số tiền (đ)",
+        "Ghi chú"
+      ],
+      [
+        "A. ECONS THU (trong kỳ)",
+        null,
+        null
+      ],
+      [
+        "   1. Thuê vật tư",
+        2471508089,
+        "116 mã"
+      ],
+      [
+        "   2. Thuê máy",
+        1849166666.6666667,
+        "7 máy"
+      ],
+      [
+        "   3. Khoản tháng (vận hành, bảo dưỡng)",
+        1936640000,
+        "12 dòng"
+      ],
+      [
+        "   4. Khoản một lần",
+        4910788102,
+        null
+      ],
+      [
+        "   5. Cước vận chuyển",
+        301764141.567,
+        "79 dòng"
+      ],
+      [
+        "   = TỔNG ECONS THU",
+        11469866999.233667,
+        null
+      ],
+      [
+        "B. ECONS TRẢ (đi thuê, trong kỳ)",
+        null,
+        null
+      ],
+      [
+        "   1. Thuê vật tư",
+        1039999832,
+        "2 NCC"
+      ],
+      [
+        "   2. Thuê máy",
+        0,
+        null
+      ],
+      [
+        "   3. Khoản tháng",
+        0,
+        null
+      ],
+      [
+        "   4. Khoản một lần",
+        1365941400,
+        null
+      ],
+      [
+        "   5. Cước vận chuyển",
+        0,
+        null
+      ],
+      [
+        "   = TỔNG ECONS TRẢ",
+        2405941232,
+        null
+      ],
+      [
+        "C. CÒN LẠI (thu − trả)",
+        9063925767.233667,
+        "Trên phần tính được"
+      ],
+      [
+        "D. ĐỐI CHIẾU CHƯA XUẤT HĐ (lũy kế từ 01/01/2023)",
+        null,
+        null
+      ],
+      [
+        "   Sản lượng cho thuê lũy kế",
+        11469866999.233667,
+        null
+      ],
+      [
+        "   Đã xuất hóa đơn 511 lũy kế",
+        9500355001,
+        "5 hóa đơn"
+      ],
+      [
+        "   = CHƯA XUẤT HÓA ĐƠN",
+        1969511998.2336674,
+        "Đã cho thuê nhưng chưa lập HĐ"
+      ]
+    ],
+    "Thuê vật tư": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "DOANH THU — THUÊ VẬT TƯ",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Mã hàng",
+        "Tên thiết bị",
+        "Nguồn",
+        "Đơn vị · ngày",
+        "ĐV·ngày miễn (hàng PHC)",
+        "Đơn giá ngày",
+        "Thành tiền"
+      ],
+      [
+        1,
+        "ALW600X2400",
+        "Tấm vách không chân (chuẩn) W600X2400",
+        "Hàng Econs",
+        59300,
+        0,
+        4080,
+        241944000
+      ],
+      [
+        2,
+        "THMK50X50.03",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=4m",
+        "Thuê ngoài",
+        660600,
+        0,
+        326,
+        215355600
+      ],
+      [
+        3,
+        "THMK50X100.01",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=2m",
+        "Thuê ngoài",
+        636590,
+        0,
+        244,
+        155327960
+      ],
+      [
+        4,
+        "RL0005",
+        "Giằng giáo Ringlock D42x1200x2mm",
+        "Thuê ngoài",
+        1530144,
+        0,
+        89,
+        136182816
+      ],
+      [
+        5,
+        "THMK50X50.02",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=3m",
+        "Hàng Econs",
+        615267,
+        0,
+        216,
+        132897672
+      ],
+      [
+        6,
+        "THMK50X50.02",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=3m",
+        "Thuê ngoài",
+        512600,
+        0,
+        242,
+        124049200
+      ],
+      [
+        7,
+        "RL0005",
+        "Giằng giáo Ringlock D42x1200x2mm",
+        "Hàng Econs",
+        1280949,
+        0,
+        80,
+        102475920
+      ],
+      [
+        8,
+        "ALW600X1200",
+        "Tấm vách không chân (chuẩn) W600X1200",
+        "Hàng Econs",
+        49480,
+        0,
+        2040,
+        100939200
+      ],
+      [
+        9,
+        "THMK50X100.02",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=3m",
+        "Thuê ngoài",
+        254730,
+        0,
+        368,
+        93740640
+      ],
+      [
+        10,
+        "TBAT.TUYPD48.04",
+        "Ống thép mạ kẽm D48 - chiều dài 6m",
+        "Hàng Econs",
+        147580,
+        0,
+        522,
+        77036760
+      ],
+      [
+        11,
+        "KICHGIAO01",
+        "Kích đầu mạ kẽm D38 L600x3.5mm, U5mm",
+        "Hàng Econs",
+        942376,
+        0,
+        80,
+        75390080
+      ],
+      [
+        12,
+        "THMK50X50.01",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=2m",
+        "Thuê ngoài",
+        445856,
+        0,
+        158,
+        70445248
+      ],
+      [
+        13,
+        "RL0004",
+        "Chân giáo Ringlock D48x1000x2,5mm",
+        "Hàng Econs",
+        526054,
+        0,
+        128,
+        67334912
+      ],
+      [
+        14,
+        "RL0003",
+        "Chân giáo Ringlock D48x1500x2,5mm",
+        "Thuê ngoài",
+        407132,
+        0,
+        158,
+        64326856
+      ],
+      [
+        15,
+        "RL0003",
+        "Chân giáo Ringlock D48x1500x2,5mm",
+        "Hàng Econs",
+        380685,
+        0,
+        160,
+        60909600
+      ],
+      [
+        16,
+        "THMK50X100.01",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=2m",
+        "Hàng Econs",
+        225289,
+        0,
+        256,
+        57673984
+      ],
+      [
+        17,
+        "KICHGIAO02",
+        "Kích chân mạ kẽm D38x600x3.5mm, BM 5mm",
+        "Thuê ngoài",
+        503748,
+        0,
+        80,
+        40299840
+      ],
+      [
+        18,
+        "TBAT0005",
+        "Giáo hoàn thiện mạ kẽm KT1.7x2,1m",
+        "Hàng Econs",
+        113410,
+        0,
+        300,
+        34023000
+      ],
+      [
+        19,
+        "TBPT0005",
+        "Giá kê thép mới H300x3m (1bộ: H300x3m=1 cây, I150x0,8m=4 cây, bu lông M16x50=16 bộ)",
+        "Hàng Econs",
+        3461,
+        0,
+        9500,
+        32879500
+      ],
+      [
+        20,
+        "THMK50X100.03",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=4m",
+        "Thuê ngoài",
+        62772,
+        0,
+        499,
+        31323228
+      ],
+      [
+        21,
+        "TBAT0001",
+        "Khóa giáo xoay D48",
+        "Hàng Econs",
+        545750,
+        0,
+        55,
+        30016250
+      ],
+      [
+        22,
+        "RL0004",
+        "Chân giáo Ringlock D48x1000x2,5mm",
+        "Thuê ngoài",
+        236280,
+        0,
+        121,
+        28589880
+      ],
+      [
+        23,
+        "KICHGIAO03",
+        "Kích đầu thép đen D38 L500x3.5mm, U3.5mm",
+        "Hàng Econs",
+        349081,
+        0,
+        80,
+        27926480
+      ],
+      [
+        24,
+        "KICHGIAO01",
+        "Kích đầu mạ kẽm D38 L600x3.5mm, U5mm",
+        "Thuê ngoài",
+        316764,
+        0,
+        80,
+        25341120
+      ],
+      [
+        25,
+        "RL0007",
+        "Giằng giáo Ringlock D42x600x2mm",
+        "Hàng Econs",
+        317409,
+        0,
+        79,
+        25075311
+      ],
+      [
+        26,
+        "TBAT.TUYPD48.02",
+        "Ống thép mạ kẽm D48 - chiều dài 3m",
+        "Hàng Econs",
+        95188,
+        0,
+        261,
+        24844068
+      ],
+      [
+        27,
+        "THMK50X50.03",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=4m",
+        "Hàng Econs",
+        84429,
+        0,
+        288,
+        24315552
+      ],
+      [
+        28,
+        "RL0001",
+        "Chân giáo Ringlock D48x2500x2,5mm",
+        "Thuê ngoài",
+        100512,
+        0,
+        231,
+        23218272
+      ],
+      [
+        29,
+        "RL0002",
+        "Chân giáo Ringlock D48x2000x2,5mm",
+        "Thuê ngoài",
+        108576,
+        0,
+        200,
+        21715200
+      ],
+      [
+        30,
+        "TBAT0002",
+        "Mâm giáo mạ kẽm 360x1600",
+        "Thuê ngoài",
+        73100,
+        0,
+        273,
+        19956300
+      ],
+      [
+        31,
+        "KICHGIAO02",
+        "Kích chân mạ kẽm D38x600x3.5mm, BM 5mm",
+        "Hàng Econs",
+        238626,
+        0,
+        80,
+        19090080
+      ],
+      [
+        32,
+        "TBAT0009",
+        "Giằng giáo hoàn thiện mạ kẽm L= 1.96m",
+        "Hàng Econs",
+        188970,
+        0,
+        100,
+        18897000
+      ],
+      [
+        33,
+        "TBAT.LC0001",
+        "Chân trụ lan can có bản mã (sử dụng ống tuýp D48x1.8mm) L=1.2m",
+        "Hàng Econs",
+        152445,
+        0,
+        120,
+        18293400
+      ],
+      [
+        34,
+        "ALW400X2400",
+        "Tấm vách không chân (chuẩn) W400X2400",
+        "Hàng Econs",
+        6000,
+        0,
+        2720,
+        16320000
+      ],
+      [
+        35,
+        "TBAT0011",
+        "Thang leo giáo H mạ kẽm 8 bậc",
+        "Hàng Econs",
+        20130,
+        0,
+        677,
+        13628010
+      ],
+      [
+        36,
+        "ALW500X2400",
+        "Tấm vách không chân (chuẩn) W500X2400",
+        "Hàng Econs",
+        4000,
+        0,
+        3400,
+        13600000
+      ],
+      [
+        37,
+        "KICHGIAO03",
+        "Kích đầu thép đen D38 L500x3.5mm, U3.5mm",
+        "Thuê ngoài",
+        168420,
+        0,
+        80,
+        13473600
+      ],
+      [
+        38,
+        "ALPK.CCXL2500",
+        "Cây chống xiên L2500XD49",
+        "Hàng Econs",
+        20000,
+        0,
+        650,
+        13000000
+      ],
+      [
+        39,
+        "THMK50X100.02",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=3m",
+        "Hàng Econs",
+        32965,
+        0,
+        384,
+        12658560
+      ],
+      [
+        40,
+        "TBAT.TUYPD48.01",
+        "Ống thép mạ kẽm D48 - chiều dài 2m",
+        "Hàng Econs",
+        64288,
+        0,
+        174,
+        11186112
+      ],
+      [
+        41,
+        "TBPT0002",
+        "Khung dầm gối đỡ + guốc trượt lõi thang máy",
+        "Hàng Econs",
+        1710,
+        0,
+        6250,
+        10687500
+      ],
+      [
+        42,
+        "THMK50X50.01",
+        "Thép hộp mạ kẽm 50x50x1.8mm, L=2m",
+        "Hàng Econs",
+        72298,
+        0,
+        144,
+        10410912
+      ],
+      [
+        43,
+        "TBAT.TUYPD48.04",
+        "Ống thép mạ kẽm D48 - chiều dài 6m",
+        "Thuê ngoài",
+        20100,
+        0,
+        504,
+        10130400
+      ],
+      [
+        44,
+        "THMK50X100.04",
+        "Thép hộp mạ kẽm 50x100x1.8mm, L=6m",
+        "Thuê ngoài",
+        12400,
+        0,
+        751,
+        9312400
+      ],
+      [
+        45,
+        "TBAT0001",
+        "Khóa giáo xoay D48",
+        "Thuê ngoài",
+        170000,
+        0,
+        53,
+        9010000
+      ],
+      [
+        46,
+        "ALW300X2400",
+        "Tấm vách không chân (chuẩn) W300X2400",
+        "Hàng Econs",
+        4000,
+        0,
+        2040,
+        8160000
+      ],
+      [
+        47,
+        "ALW400X1200",
+        "Tấm vách không chân (chuẩn) W400X1200",
+        "Hàng Econs",
+        6000,
+        0,
+        1360,
+        8160000
+      ],
+      [
+        48,
+        "TBPT0008",
+        "Hộc cẩu đồ",
+        "Hàng Econs",
+        927,
+        0,
+        8700,
+        8064900
+      ],
+      [
+        49,
+        "TBAT.TUYPD48.03",
+        "Ống thép mạ kẽm D48 - chiều dài 4m",
+        "Hàng Econs",
+        18800,
+        0,
+        348,
+        6542400
+      ],
+      [
+        50,
+        "KICHGIAO04",
+        "Kích chân thép đen D38x500x3.5mm, BM 3.5mm",
+        "Hàng Econs",
+        80268,
+        0,
+        80,
+        6421440
+      ],
+      [
+        51,
+        "TBAT0002",
+        "Mâm giáo mạ kẽm 360x1600",
+        "Hàng Econs",
+        18532,
+        0,
+        340,
+        6300880
+      ],
+      [
+        52,
+        "TBPT0007",
+        "Phễu đổ bê tông",
+        "Hàng Econs",
+        591,
+        0,
+        10400,
+        6146400
+      ],
+      [
+        53,
+        "TBAT0005",
+        "Giáo hoàn thiện mạ kẽm KT1.7x2,1m",
+        "Thuê ngoài",
+        20800,
+        0,
+        286,
+        5948800
+      ],
+      [
+        54,
+        "TBAT0011",
+        "Thang leo giáo H mạ kẽm 8 bậc",
+        "Thuê ngoài",
+        8167,
+        0,
+        630,
+        5145210
+      ],
+      [
+        55,
+        "RL0001",
+        "Chân giáo Ringlock D48x2500x2,5mm",
+        "Hàng Econs",
+        18144,
+        0,
+        268,
+        4862592
+      ],
+      [
+        56,
+        "ALW350X2400",
+        "Tấm vách không chân (chuẩn) W350X2400",
+        "Hàng Econs",
+        2000,
+        0,
+        2380,
+        4760000
+      ],
+      [
+        57,
+        "ALW300X1200",
+        "Tấm vách không chân (chuẩn) W300X1200",
+        "Hàng Econs",
+        4425,
+        0,
+        1020,
+        4513500
+      ],
+      [
+        58,
+        "TBPT0009",
+        "Hộc đựng bê tông đáy bơm",
+        "Hàng Econs",
+        507,
+        0,
+        8700,
+        4410900
+      ],
+      [
+        59,
+        "ALW500X1200",
+        "Tấm vách không chân (chuẩn) W500X1200",
+        "Hàng Econs",
+        2194,
+        0,
+        1700,
+        3729800
+      ],
+      [
+        60,
+        "THMK60x120.01",
+        "Thép hộp mạ kẽm 60x120x2.3mm, L=2m",
+        "Hàng Econs",
+        13464,
+        0,
+        256,
+        3446784
+      ],
+      [
+        61,
+        "TBAT0012",
+        "Khung lưới chắn vật rơi KT 2x4m",
+        "Hàng Econs",
+        2900,
+        0,
+        1024,
+        2969600
+      ],
+      [
+        62,
+        "ALW450X2400",
+        "Tấm vách không chân (chuẩn) W450X2400",
+        "Hàng Econs",
+        970,
+        0,
+        3060,
+        2968200
+      ],
+      [
+        63,
+        "TBAT.TUYPD48.03",
+        "Ống thép mạ kẽm D48 - chiều dài 4m",
+        "Thuê ngoài",
+        8400,
+        0,
+        336,
+        2822400
+      ],
+      [
+        64,
+        "ALW350X1200",
+        "Tấm vách không chân (chuẩn) W350X1200",
+        "Hàng Econs",
+        1940,
+        0,
+        1190,
+        2308600
+      ],
+      [
+        65,
+        "TBAT0009",
+        "Giằng giáo hoàn thiện mạ kẽm L= 1.96m",
+        "Thuê ngoài",
+        20800,
+        0,
+        86,
+        1788800
+      ],
+      [
+        66,
+        "TBAT0013",
+        "U chống truyền",
+        "Hàng Econs",
+        3636,
+        0,
+        460,
+        1672560
+      ],
+      [
+        67,
+        "ALPK.CCXL500",
+        "Cây chống xiên L500xD34",
+        "Hàng Econs",
+        19400,
+        0,
+        85,
+        1649000
+      ],
+      [
+        68,
+        "ALW450X1200",
+        "Tấm vách không chân (chuẩn) W450X1200",
+        "Hàng Econs",
+        970,
+        0,
+        1530,
+        1484100
+      ],
+      [
+        69,
+        "ALW250X1200",
+        "Tấm vách không chân (chuẩn) W250X1200",
+        "Hàng Econs",
+        1552,
+        0,
+        850,
+        1319200
+      ],
+      [
+        70,
+        "ALW200X1200",
+        "Tấm vách không chân (chuẩn) W200X1200",
+        "Hàng Econs",
+        970,
+        0,
+        680,
+        659600
+      ],
+      [
+        71,
+        "ALPK.ALB",
+        "BARACKET (CÙM XÀ GỒ)",
+        "Hàng Econs",
+        182000,
+        0,
+        0,
+        0
+      ],
+      [
+        72,
+        "ALPK.CA1200",
+        "V LIÊN KẾT (CHUẨN) CA(63,5+63,5)X1200",
+        "Hàng Econs",
+        8000,
+        0,
+        0,
+        0
+      ],
+      [
+        73,
+        "ALPK.CA2400",
+        "V LIÊN KẾT (CHUẨN) CA(63,5+63,5)X2400",
+        "Hàng Econs",
+        8000,
+        0,
+        0,
+        0
+      ],
+      [
+        74,
+        "ALPK.RP",
+        "ROUND PIN (CHỐT NGẮN) (19con/1kg)",
+        "Hàng Econs",
+        2459520,
+        0,
+        0,
+        0
+      ],
+      [
+        75,
+        "ALPK.WP",
+        "WEDGE PIN (CHỐT DẸT) (47 con/1kg)",
+        "Hàng Econs",
+        2414528,
+        0,
+        0,
+        0
+      ],
+      [
+        76,
+        "BD0003",
+        "Đèn led 200W",
+        "Hàng Econs",
+        8190,
+        0,
+        0,
+        0
+      ],
+      [
+        77,
+        "BOMCHIM0001",
+        "Bơm chìm 1,5 KW",
+        "Hàng Econs",
+        86,
+        0,
+        0,
+        0
+      ],
+      [
+        78,
+        "BOMCHIM0003",
+        "Bơm chìm 3 KW",
+        "Hàng Econs",
+        86,
+        0,
+        0,
+        0
+      ],
+      [
+        79,
+        "BOMCHIM0004",
+        "Bơm chìm 4 KW",
+        "Hàng Econs",
+        114,
+        0,
+        0,
+        0
+      ],
+      [
+        80,
+        "BOMCHIM0006",
+        "Bơm chìm 1.1 KW",
+        "Hàng Econs",
+        57,
+        0,
+        0,
+        0
+      ],
+      [
+        81,
+        "BOMCHIM0007",
+        "Bơm chìm 2.2 KW",
+        "Hàng Econs",
+        29,
+        0,
+        0,
+        0
+      ],
+      [
+        82,
+        "CAPAL0004",
+        "Cáp nhôm 4x70+1x35",
+        "Hàng Econs",
+        166260,
+        0,
+        0,
+        0
+      ],
+      [
+        83,
+        "CAPAL0005",
+        "Cáp nhôm 4x120+1x70",
+        "Hàng Econs",
+        18000,
+        0,
+        0,
+        0
+      ],
+      [
+        84,
+        "CAPAL0007",
+        "Cáp nhôm vặn xoắn 4x185",
+        "Hàng Econs",
+        42749,
+        0,
+        0,
+        0
+      ],
+      [
+        85,
+        "CAPAL0009",
+        "Cáp nhôm vặn xoắn 4x35",
+        "Hàng Econs",
+        124046,
+        0,
+        0,
+        0
+      ],
+      [
+        86,
+        "CAPCU0007",
+        "Dây đồng 2x2,5",
+        "Hàng Econs",
+        170400,
+        0,
+        0,
+        0
+      ],
+      [
+        87,
+        "CAPCU0016",
+        "Cáp đồng 4x70",
+        "Hàng Econs",
+        32706,
+        0,
+        0,
+        0
+      ],
+      [
+        88,
+        "CAPCU0019",
+        "Dây đồng 3x10+1x6",
+        "Hàng Econs",
+        21670,
+        0,
+        0,
+        0
+      ],
+      [
+        89,
+        "CAPCU0020",
+        "Dây đồng 3x16+1x10",
+        "Hàng Econs",
+        5016,
+        0,
+        0,
+        0
+      ]
+    ],
+    "Thuê máy": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "DOANH THU — THUÊ MÁY",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Mã máy",
+        "Tên máy",
+        "Số ngày có mặt",
+        "Đơn giá ngày",
+        "Thành tiền"
+      ],
+      [
+        1,
+        "CT7527.01",
+        "Cẩu tháp QTP7527-01 số seri 3002",
+        155,
+        2333333.3333333335,
+        361666666.6666667
+      ],
+      [
+        2,
+        "CT7527.02",
+        "Cẩu tháp QTP7527-02 số seri 3003",
+        136,
+        2333333.3333333335,
+        317333333.3333334
+      ],
+      [
+        3,
+        "CT7527.03",
+        "Cẩu tháp QTP7527-03 số seri 3005",
+        133,
+        2333333.3333333335,
+        310333333.3333334
+      ],
+      [
+        4,
+        "CT7021B.01",
+        "Cẩu tháp QTP7021-01 số seri 2999",
+        143,
+        2166666.6666666665,
+        309833333.3333333
+      ],
+      [
+        5,
+        "CT7021B.03",
+        "Cẩu tháp QTP7021-03 số seri 3001",
+        126,
+        2166666.6666666665,
+        273000000
+      ],
+      [
+        6,
+        "CT7021B.02",
+        "Cẩu tháp QTP7021-02 số seri 3000",
+        123,
+        2166666.6666666665,
+        266499999.99999997
+      ],
+      [
+        7,
+        "MAYPD0002",
+        "Máy phát điện 350 kVA - AV350/VN",
+        21,
+        500000,
+        10500000
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Khoản tháng": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "DOANH THU — KHOẢN THÁNG (VẬN HÀNH · BẢO DƯỠNG)",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Mã máy",
+        "Tên máy",
+        "Loại khoản",
+        "Số ngày",
+        "Số tháng",
+        "Thành tiền"
+      ],
+      [
+        1,
+        "CT7527.01",
+        "Cẩu tháp QTP7527-01 số seri 3002",
+        "Nhân công vận hành",
+        155,
+        6,
+        352366666.6666667
+      ],
+      [
+        2,
+        "CT7021B.01",
+        "Cẩu tháp QTP7021-01 số seri 2999",
+        "Nhân công vận hành",
+        143,
+        5,
+        325086666.6666667
+      ],
+      [
+        3,
+        "CT7527.02",
+        "Cẩu tháp QTP7527-02 số seri 3003",
+        "Nhân công vận hành",
+        136,
+        5,
+        309173333.3333334
+      ],
+      [
+        4,
+        "CT7527.03",
+        "Cẩu tháp QTP7527-03 số seri 3005",
+        "Nhân công vận hành",
+        133,
+        5,
+        302353333.3333334
+      ],
+      [
+        5,
+        "CT7021B.03",
+        "Cẩu tháp QTP7021-03 số seri 3001",
+        "Nhân công vận hành",
+        126,
+        5,
+        286440000
+      ],
+      [
+        6,
+        "CT7021B.02",
+        "Cẩu tháp QTP7021-02 số seri 3000",
+        "Nhân công vận hành",
+        123,
+        5,
+        279620000
+      ],
+      [
+        7,
+        "CT7527.01",
+        "Cẩu tháp QTP7527-01 số seri 3002",
+        "Bảo dưỡng",
+        155,
+        6,
+        15500000
+      ],
+      [
+        8,
+        "CT7021B.01",
+        "Cẩu tháp QTP7021-01 số seri 2999",
+        "Bảo dưỡng",
+        143,
+        5,
+        14300000
+      ],
+      [
+        9,
+        "CT7527.02",
+        "Cẩu tháp QTP7527-02 số seri 3003",
+        "Bảo dưỡng",
+        136,
+        5,
+        13600000
+      ],
+      [
+        10,
+        "CT7527.03",
+        "Cẩu tháp QTP7527-03 số seri 3005",
+        "Bảo dưỡng",
+        133,
+        5,
+        13300000
+      ],
+      [
+        11,
+        "CT7021B.03",
+        "Cẩu tháp QTP7021-03 số seri 3001",
+        "Bảo dưỡng",
+        126,
+        5,
+        12600000
+      ],
+      [
+        12,
+        "CT7021B.02",
+        "Cẩu tháp QTP7021-02 số seri 3000",
+        "Bảo dưỡng",
+        123,
+        5,
+        12300000
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ],
+    "Khoản một lần": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null,
+        null
+      ],
+      [
+        "DOANH THU — KHOẢN MỘT LẦN",
+        null,
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Loại khoản",
+        "Số khoản",
+        "Thành tiền"
+      ],
+      [
+        1,
+        "Bán đứt (không thu hồi)",
+        18,
+        1794432000
+      ],
+      [
+        2,
+        "Phụ trợ (buồng móng, đèn, chống sét, thí nghiệm)",
+        28,
+        1587165622
+      ],
+      [
+        3,
+        "Lắp dựng",
+        19,
+        829260000
+      ],
+      [
+        4,
+        "Vận chuyển",
+        30,
+        592700000
+      ],
+      [
+        5,
+        "Khác",
+        12,
+        50400000
+      ],
+      [
+        6,
+        "Kiểm định",
+        6,
+        25200000
+      ],
+      [
+        7,
+        "Bảo hiểm",
+        6,
+        24630480
+      ],
+      [
+        8,
+        "Tháo dỡ",
+        1,
+        7000000
+      ],
+      [
+        "TỔNG CỘNG",
+        null,
+        null,
+        null
+      ]
+    ],
+    "Cảnh báo": [
+      [
+        "CÔNG TY TNHH MTV QUẢN LÝ THIẾT BỊ XÂY DỰNG PHỤC HƯNG — PHC ECON CO., LTD",
+        null,
+        null,
+        null
+      ],
+      [
+        "Tầng 5, Tháp A, Tòa CT2 (The Light), Đường Tố Hữu, Phường Đại Mỗ, TP Hà Nội  ·  ĐT: 091.784.768  ·  Email: thietbi@phuchung.com.vn",
+        null,
+        null,
+        null
+      ],
+      [
+        "CẢNH BÁO / CẦN XỬ LÝ",
+        null,
+        null,
+        null
+      ],
+      [
+        "Dự án: PHC - HH2 Gamuda  ·  Kỳ 24/09/2025 → 24/09/2026",
+        null,
+        null,
+        null
+      ],
+      [
+        "STT",
+        "Loại cảnh báo",
+        "Mã / Máy",
+        "Chi tiết"
+      ],
+      [
+        1,
+        "Chưa khai giá thuê",
+        "ALTC1200",
+        "GÓC TRONG VÁCH (CHUẨN) TC(100+100)x1200 — 5.000 đvt·ngày"
+      ],
+      [
+        2,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.01",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        3,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.02",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        4,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.01",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        5,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.03",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        6,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.02",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        7,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.03",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        8,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.01",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        9,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.01",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        10,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.03",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        11,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.03",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        12,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7021B.02",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        13,
+        "Khoản chờ khi trả máy (thu)",
+        "CT7527.02",
+        "máy còn ở công trình theo sổ — đã trả thì nhập phiếu trả / điều chuyển máy"
+      ],
+      [
+        14,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ],
+      [
+        15,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ],
+      [
+        16,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ],
+      [
+        17,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ],
+      [
+        18,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ],
+      [
+        19,
+        "Khoản chờ khi trả máy (trả)",
+        "2703/2026/HĐKT-HH2/PHCECONS-TLX",
+        "chưa gắn máy — nhập ngày trả"
+      ]
+    ]
+  }
+}
