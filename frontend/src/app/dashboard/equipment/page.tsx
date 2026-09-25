@@ -12,7 +12,25 @@ import {
   CONTRACTS_DATA,
   TENANTS_DATA,
   INVENTORY_ITEMS_SAMPLE,
+  HeavyEquipmentItem,
+  GamudaRentalItem,
 } from '@/data/equipmentData';
+
+import {
+  downloadCSV,
+  ToastNotification,
+  ExportDataModal,
+  AuditSessionModal,
+  InspectionModal,
+  MaintenanceModal,
+  CreateTicketModal,
+  TicketDetailModal,
+  GamudaAppendixModal,
+  UpdatePriceModal,
+  CreateContractModal,
+  AddHeavyEquipmentModal,
+  AddTenantModal,
+} from '@/components/equipment/EquipmentModals';
 
 export default function EquipmentManagementPage() {
   const [activeTab, setActiveTab] = useState<'overview' | 'warehouse' | 'maintenance' | 'financial' | 'contracts' | 'settings'>('overview');
@@ -29,30 +47,67 @@ export default function EquipmentManagementPage() {
   const [contractFilter, setContractFilter] = useState('all');
   const [showNegativeOnly, setShowNegativeOnly] = useState(false);
 
+  // Dynamic Data States (allows adding/updating items interactively)
+  const [heavyData, setHeavyData] = useState<HeavyEquipmentItem[]>(HEAVY_EQUIPMENT_DATA);
+  const [ticketsList, setTicketsList] = useState(INVENTORY_TICKETS);
+  const [gamudaData, setGamudaData] = useState<GamudaRentalItem[]>(GAMUDA_RENTAL_DATA);
+  const [contractsList, setContractsList] = useState(CONTRACTS_DATA);
+  const [tenantsList, setTenantsList] = useState(TENANTS_DATA);
+  const [materialsList, setMaterialsList] = useState(INVENTORY_ITEMS_SAMPLE);
+  const [auditSessions, setAuditSessions] = useState<{ title: string; warehouse: string; leader: string; date: string; note: string }[]>([]);
+
+  // Interactive Modals State
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const [showExportModal, setShowExportModal] = useState(false);
+  const [showAuditSessionModal, setShowAuditSessionModal] = useState(false);
+  const [showInspectionModal, setShowInspectionModal] = useState(false);
+  const [showMaintenanceModal, setShowMaintenanceModal] = useState(false);
+  const [showCreateTicketModal, setShowCreateTicketModal] = useState(false);
+  const [selectedTicket, setSelectedTicket] = useState<any | null>(null);
+  const [showGamudaAppendixModal, setShowGamudaAppendixModal] = useState(false);
+  const [showUpdatePriceModal, setShowUpdatePriceModal] = useState(false);
+  const [showCreateContractModal, setShowCreateContractModal] = useState(false);
+  const [showAddEquipmentModal, setShowAddEquipmentModal] = useState(false);
+  const [showAddTenantModal, setShowAddTenantModal] = useState(false);
+
+  // Toast Helper
+  const triggerToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage((current) => (current === msg ? null : current));
+    }, 4000);
+  };
+
   // Filtered Heavy Equipment
   const filteredHeavy = useMemo(() => {
-    return HEAVY_EQUIPMENT_DATA.filter(item => {
+    return heavyData.filter(item => {
       const q = heavySearch.toLowerCase();
       return item.name.toLowerCase().includes(q) || item.code.toLowerCase().includes(q) || item.location.toLowerCase().includes(q);
     });
-  }, [heavySearch]);
+  }, [heavySearch, heavyData]);
 
   // Filtered Tickets
   const filteredTickets = useMemo(() => {
-    return INVENTORY_TICKETS.filter(t => {
+    return ticketsList.filter(t => {
       const q = ticketSearch.toLowerCase();
-      return t.code.toLowerCase().includes(q) || t.source.toLowerCase().includes(q) || t.target.toLowerCase().includes(q) || t.type.toLowerCase().includes(q);
+      return t.code.toLowerCase().includes(q) || t.source.toLowerCase().includes(q) || t.target.toLowerCase().includes(q) || t.type.toLowerCase().includes(q) || t.partner.toLowerCase().includes(q);
     });
-  }, [ticketSearch]);
+  }, [ticketSearch, ticketsList]);
 
   // Filtered Contracts
   const filteredContracts = useMemo(() => {
-    return CONTRACTS_DATA.filter(c => {
+    return contractsList.filter(c => {
       if (contractFilter === 'rent_out') return c.type === 'Cho thuê thiết bị';
       if (contractFilter === 'rent_in') return c.type === 'Đi thuê ngoài';
+      if (contractFilter === 'unpriced') return c.val === '—';
       return true;
     });
-  }, [contractFilter]);
+  }, [contractFilter, contractsList]);
+
+  // Financial Summary from gamudaData
+  const gamudaRevenue = useMemo(() => {
+    return gamudaData.reduce((acc, cur) => acc + (cur.total_amount || 0), 0);
+  }, [gamudaData]);
 
   const formatVND = (val: number) => {
     return new Intl.NumberFormat('vi-VN').format(Math.round(val)) + ' đ';
@@ -62,9 +117,159 @@ export default function EquipmentManagementPage() {
     return new Intl.NumberFormat('vi-VN').format(val);
   };
 
+  // Handlers for Add / Update
+  const handleCreateTicket = (newTicket: any) => {
+    setTicketsList([newTicket, ...ticketsList]);
+    triggerToast(`Đã lưu phiếu kho ${newTicket.code} thành công!`);
+  };
+
+  const handleAddEquipment = (newItem: HeavyEquipmentItem) => {
+    setHeavyData([newItem, ...heavyData]);
+    triggerToast(`Đã thêm thiết bị lớn ${newItem.code} - ${newItem.name} vào danh mục tài sản!`);
+  };
+
+  const handleAddTenant = (newTenant: any) => {
+    setTenantsList([newTenant, ...tenantsList]);
+    triggerToast(`Đã thêm bên thuê ${newTenant.name} (${newTenant.code})!`);
+  };
+
+  const handleCreateContract = (newContract: any) => {
+    setContractsList([newContract, ...contractsList]);
+    triggerToast(`Đã tạo hợp đồng mới số ${newContract.code}!`);
+  };
+
+  const handleCreateAuditSession = (session: { title: string; warehouse: string; leader: string; date: string; note: string }) => {
+    setAuditSessions([session, ...auditSessions]);
+    triggerToast(`Đã mở phiên kiểm kê tại "${session.warehouse}" do ${session.leader} phụ trách!`);
+  };
+
+  const handleSavePrice = (code: string, price: number) => {
+    const qtyDays = 14520;
+    const total = qtyDays * price;
+    const updated = [
+      ...gamudaData,
+      {
+        code: 'ALTC1200',
+        name: 'Thanh chống nhôm ALTC 1200mm (Khai bổ sung giá)',
+        quantity_days: qtyDays,
+        unit_price: price,
+        total_amount: total,
+        source: 'Hàng Econs',
+      },
+    ];
+    setGamudaData(updated);
+    triggerToast(`Đã cập nhật đơn giá ${code} là ${formatVND(price)}/ngày! Doanh thu Gamuda tăng thêm ${formatVND(total)}.`);
+  };
+
+  // Instant Quick Exports
+  const quickExportInventory = () => {
+    const headers = ['STT', 'Kho lưu giữ', 'Mã VT', 'Tên thiết bị / vật tư', 'Nhóm', 'ĐVT', 'Tình trạng', 'Sở hữu', 'SL tồn'];
+    const rows = materialsList.map((m, idx) => [
+      idx + 1,
+      m.kho,
+      m.ma,
+      m.ten,
+      m.nhom,
+      m.dvt,
+      m.tinhTrang,
+      m.soHuu,
+      m.ton,
+    ]);
+    downloadCSV('ECONS_Bao_Cao_Ton_Kho_Thiet_Bi.csv', headers, rows);
+    triggerToast('Đã xuất file Excel Báo cáo tồn kho thiết bị thành công!');
+  };
+
+  const quickExportTenants = () => {
+    const headers = ['STT', 'Mã đối tác', 'Tên đối tác / Bên thuê', 'Mã số thuế', 'Nội bộ PHC', 'Ghi chú đối soát'];
+    const rows = tenantsList.map((t, idx) => [
+      idx + 1,
+      t.code,
+      t.name,
+      t.mst,
+      t.internal ? 'Có' : 'Không',
+      t.note,
+    ]);
+    downloadCSV('ECONS_Danh_Muc_Ben_Thue_Doi_Tac.csv', headers, rows);
+    triggerToast('Đã xuất danh mục 22 đối tác / bên thuê!');
+  };
+
   return (
-    <div className="min-h-screen bg-[#0b1328] text-slate-100 p-4 lg:p-6 rounded-2xl shadow-2xl border border-slate-800 font-sans">
+    <div className="min-h-screen bg-[#0b1328] text-slate-100 p-4 lg:p-6 rounded-2xl shadow-2xl border border-slate-800 font-sans relative">
       
+      {/* Toast Notification */}
+      <ToastNotification message={toastMessage} onClose={() => setToastMessage(null)} />
+
+      {/* Interactive Modals */}
+      <ExportDataModal 
+        isOpen={showExportModal} 
+        onClose={() => setShowExportModal(false)}
+        heavyEquipmentData={heavyData}
+        gamudaRentalData={gamudaData}
+        inventoryTickets={ticketsList}
+        contractsData={contractsList}
+        onNotify={triggerToast}
+      />
+
+      <AuditSessionModal 
+        isOpen={showAuditSessionModal}
+        onClose={() => setShowAuditSessionModal(false)}
+        onCreateSession={handleCreateAuditSession}
+      />
+
+      <InspectionModal 
+        isOpen={showInspectionModal}
+        onClose={() => setShowInspectionModal(false)}
+        onNotify={triggerToast}
+      />
+
+      <MaintenanceModal 
+        isOpen={showMaintenanceModal}
+        onClose={() => setShowMaintenanceModal(false)}
+        onNotify={triggerToast}
+      />
+
+      <CreateTicketModal 
+        isOpen={showCreateTicketModal}
+        onClose={() => setShowCreateTicketModal(false)}
+        onCreateTicket={handleCreateTicket}
+      />
+
+      <TicketDetailModal 
+        ticket={selectedTicket}
+        onClose={() => setSelectedTicket(null)}
+        onNotify={triggerToast}
+      />
+
+      <GamudaAppendixModal 
+        isOpen={showGamudaAppendixModal}
+        onClose={() => setShowGamudaAppendixModal(false)}
+        onNotify={triggerToast}
+      />
+
+      <UpdatePriceModal 
+        isOpen={showUpdatePriceModal}
+        onClose={() => setShowUpdatePriceModal(false)}
+        onSavePrice={handleSavePrice}
+      />
+
+      <CreateContractModal 
+        isOpen={showCreateContractModal}
+        onClose={() => setShowCreateContractModal(false)}
+        onCreateContract={handleCreateContract}
+      />
+
+      <AddHeavyEquipmentModal 
+        isOpen={showAddEquipmentModal}
+        onClose={() => setShowAddEquipmentModal(false)}
+        onAddEquipment={handleAddEquipment}
+      />
+
+      <AddTenantModal 
+        isOpen={showAddTenantModal}
+        onClose={() => setShowAddTenantModal(false)}
+        onAddTenant={handleAddTenant}
+      />
+
       {/* Top Header / Breadcrumb & Branding */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-5 border-b border-slate-800">
         <div>
@@ -91,7 +296,10 @@ export default function EquipmentManagementPage() {
             {['Tuần này', 'Tháng này', 'Quý này', 'Năm nay', 'Lũy kế'].map((t) => (
               <button
                 key={t}
-                onClick={() => setTimeFilter(t)}
+                onClick={() => {
+                  setTimeFilter(t);
+                  triggerToast(`Đã lọc phạm vi dữ liệu: ${t}`);
+                }}
                 className={`px-3 py-1.5 rounded-md transition-all ${
                   timeFilter === t
                     ? 'bg-blue-600 text-white font-semibold shadow'
@@ -108,8 +316,12 @@ export default function EquipmentManagementPage() {
             <span>01/01/2026 — 24/09/2026</span>
           </div>
 
-          <button className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-colors">
-            <svg className="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+          {/* ACTIVE EXPORT EXCEL BUTTON */}
+          <button 
+            onClick={() => setShowExportModal(true)}
+            className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow-[0_0_12px_rgba(59,130,246,0.3)] active:scale-95"
+          >
+            <svg className="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
             Xuất Excel
           </button>
         </div>
@@ -119,11 +331,11 @@ export default function EquipmentManagementPage() {
       <div className="flex gap-2 overflow-x-auto py-4 border-b border-slate-800 scrollbar-none">
         {[
           { id: 'overview', label: '📊 Tổng quan thiết bị', badge: 'Live' },
-          { id: 'warehouse', label: '📦 Xuất nhập kho & Tồn kho', badge: '1.959 dòng' },
-          { id: 'maintenance', label: '🏗️ Bảo trì & Thiết bị lớn', badge: '36 cẩu tháp' },
-          { id: 'financial', label: '💰 Doanh thu & Chi phí', badge: 'Gamuda 11.4 tỷ' },
-          { id: 'contracts', label: '📑 Hợp đồng & Điều khoản', badge: '119 HĐ' },
-          { id: 'settings', label: '⚙️ Thiết lập & Danh mục', badge: '22 bên thuê' },
+          { id: 'warehouse', label: '📦 Xuất nhập kho & Tồn kho', badge: `${ticketsList.length} phiếu` },
+          { id: 'maintenance', label: '🏗️ Bảo trì & Thiết bị lớn', badge: `${heavyData.length} máy` },
+          { id: 'financial', label: '💰 Doanh thu & Chi phí', badge: 'Gamuda' },
+          { id: 'contracts', label: '📑 Hợp đồng & Điều khoản', badge: `${contractsList.length} HĐ` },
+          { id: 'settings', label: '⚙️ Thiết lập & Danh mục', badge: `${tenantsList.length} bên thuê` },
         ].map((tab) => (
           <button
             key={tab.id}
@@ -145,14 +357,17 @@ export default function EquipmentManagementPage() {
       </div>
 
       {/* ========================================================================= */}
-      {/* TAB 1: TỔNG QUAN THIẾT BỊ (MATCHING IMAGE 4 & 5) */}
+      {/* TAB 1: TỔNG QUAN THIẾT BỊ */}
       {/* ========================================================================= */}
       {activeTab === 'overview' && (
         <div className="space-y-6 pt-5">
           {/* 4 KPI Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {/* Card 1 */}
-            <div className="bg-[#111c35] border border-blue-500/30 rounded-xl p-5 relative overflow-hidden group hover:border-blue-500 transition-all">
+            <div 
+              onClick={() => setActiveTab('maintenance')}
+              className="bg-[#111c35] border border-blue-500/30 rounded-xl p-5 relative overflow-hidden group hover:border-blue-500 transition-all cursor-pointer"
+            >
               <div className="text-[11px] font-bold text-emerald-400 tracking-wider uppercase mb-1">
                 Thiết bị sở hữu ECONS
               </div>
@@ -166,7 +381,10 @@ export default function EquipmentManagementPage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-slate-600 transition-all">
+            <div 
+              onClick={() => setActiveTab('warehouse')}
+              className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-blue-500 transition-all cursor-pointer"
+            >
               <div className="text-[11px] font-bold text-blue-400 tracking-wider uppercase mb-1">
                 Đang ở công trường / Bên thuê
               </div>
@@ -180,7 +398,13 @@ export default function EquipmentManagementPage() {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-slate-600 transition-all">
+            <div 
+              onClick={() => {
+                setActiveTab('warehouse');
+                setWarehouseSubTab('inventory');
+              }}
+              className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-blue-500 transition-all cursor-pointer"
+            >
               <div className="text-[11px] font-bold text-slate-400 tracking-wider uppercase mb-1">
                 Tổng tồn kho toàn công ty
               </div>
@@ -194,13 +418,19 @@ export default function EquipmentManagementPage() {
             </div>
 
             {/* Card 4 */}
-            <div className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-slate-600 transition-all">
+            <div 
+              onClick={() => {
+                setActiveTab('warehouse');
+                setWarehouseSubTab('tickets');
+              }}
+              className="bg-[#111c35] border border-slate-700/80 rounded-xl p-5 relative overflow-hidden group hover:border-blue-500 transition-all cursor-pointer"
+            >
               <div className="text-[11px] font-bold text-amber-400 tracking-wider uppercase mb-1">
-                Phiếu chờ duyệt
+                Phiếu kho thiết bị
               </div>
               <div className="text-2xl lg:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2">
-                0 <span className="text-xs font-normal text-slate-400">phiếu</span>
-                <span className="text-xs font-normal px-2 py-0.5 rounded bg-slate-800 text-slate-300">0 nháp</span>
+                {ticketsList.length} <span className="text-xs font-normal text-slate-400">phiếu</span>
+                <span className="text-xs font-normal px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-800">Đã duyệt</span>
               </div>
               <div className="text-xs text-emerald-400 mt-2 flex items-center gap-1">
                 ✓ Hệ thống kiểm soát luân chuyển đang thông suốt
@@ -324,10 +554,21 @@ export default function EquipmentManagementPage() {
                 </div>
               </div>
 
-              {/* Warning Banner */}
-              <div className="p-3 bg-red-950/40 border border-red-800/60 rounded-lg flex items-center gap-2.5 text-xs text-red-300">
-                <svg className="w-5 h-5 text-red-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/></svg>
-                <span><strong>90 dòng tồn âm</strong> — mở màn Tồn kho để đối chiếu và cân sổ.</span>
+              {/* Warning Banner: Clickable to jump to Negative Stock view */}
+              <div 
+                onClick={() => {
+                  setActiveTab('warehouse');
+                  setWarehouseSubTab('inventory');
+                  setShowNegativeOnly(true);
+                  triggerToast('Đã kích hoạt bộ lọc: Chỉ xem 90 mã tồn âm để đối chiếu');
+                }}
+                className="p-3 bg-red-950/40 border border-red-800/60 rounded-lg flex items-center justify-between gap-2.5 text-xs text-red-300 hover:bg-red-900/40 transition-colors cursor-pointer group"
+              >
+                <div className="flex items-center gap-2.5">
+                  <svg className="w-5 h-5 text-red-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd"/></svg>
+                  <span><strong>90 dòng tồn âm</strong> — mở màn Tồn kho để đối chiếu và cân sổ.</span>
+                </div>
+                <span className="text-xs text-red-400 font-bold group-hover:translate-x-1 transition-transform">Xem ngay →</span>
               </div>
             </div>
           </div>
@@ -387,8 +628,11 @@ export default function EquipmentManagementPage() {
                 </div>
               </div>
 
-              <div className="p-3 bg-amber-950/40 border border-amber-800/60 rounded-lg text-xs text-amber-300">
-                <strong>156.298,91 đơn vị hỏng</strong> chiếm 6,5% — vượt ngưỡng an toàn 5%, cần lập phiếu bảo dưỡng hoặc thanh lý.
+              <div 
+                onClick={() => setActiveTab('maintenance')}
+                className="p-3 bg-amber-950/40 border border-amber-800/60 rounded-lg text-xs text-amber-300 hover:bg-amber-900/40 transition-colors cursor-pointer"
+              >
+                <strong>156.298,91 đơn vị hỏng</strong> chiếm 6,5% — vượt ngưỡng an toàn 5%, click để chuyển tab bảo dưỡng hoặc thanh lý.
               </div>
             </div>
 
@@ -396,16 +640,37 @@ export default function EquipmentManagementPage() {
             <div className="bg-[#111c35] border border-slate-800 rounded-xl p-5 flex flex-col justify-between">
               <div>
                 <h3 className="text-base font-bold text-white mb-1">Kiểm kê — lệch theo phiên</h3>
-                <p className="text-xs text-slate-400 mb-4">6 phiên gần nhất · Lệch = thực tế - hệ thống</p>
+                <p className="text-xs text-slate-400 mb-4">
+                  {auditSessions.length > 0 ? `${auditSessions.length} phiên đang thực hiện` : 'Chưa có phiên kiểm kê nào trong kỳ'}
+                </p>
 
-                <div className="h-44 border border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center text-center p-4">
-                  <svg className="w-10 h-10 text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-                  <span className="text-xs text-slate-400 font-medium">Chưa có phiên kiểm kê nào trong kỳ</span>
-                  <span className="text-[10px] text-slate-500 mt-1">Toàn bộ 65 kho bãi đang vận hành chuẩn số liệu</span>
-                </div>
+                {auditSessions.length === 0 ? (
+                  <div className="h-44 border border-dashed border-slate-800 rounded-xl flex flex-col items-center justify-center text-center p-4">
+                    <svg className="w-10 h-10 text-slate-600 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    <span className="text-xs text-slate-400 font-medium">Chưa có phiên kiểm kê nào trong kỳ</span>
+                    <span className="text-[10px] text-slate-500 mt-1">Toàn bộ 65 kho bãi đang vận hành chuẩn số liệu</span>
+                  </div>
+                ) : (
+                  <div className="h-44 overflow-y-auto space-y-2 pr-1">
+                    {auditSessions.map((s, idx) => (
+                      <div key={idx} className="p-2.5 bg-[#0b1328] border border-blue-500/40 rounded-lg text-xs">
+                        <div className="font-bold text-blue-400">{s.title}</div>
+                        <div className="text-slate-300 mt-0.5 font-medium">{s.warehouse}</div>
+                        <div className="text-[10px] text-slate-400 mt-1 flex justify-between">
+                          <span>{s.leader}</span>
+                          <span className="text-emerald-400 font-semibold">{s.date}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
-              <button className="w-full mt-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold rounded-lg border border-slate-700 transition-colors">
+              {/* ACTIVE BUTTON: MỞ PHIÊN KIỂM KÊ */}
+              <button 
+                onClick={() => setShowAuditSessionModal(true)}
+                className="w-full mt-4 py-2.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg shadow transition-all active:scale-95"
+              >
                 + Mở phiên kiểm kê đối soát kho mới
               </button>
             </div>
@@ -420,7 +685,7 @@ export default function EquipmentManagementPage() {
               </div>
               <button 
                 onClick={() => setActiveTab('warehouse')}
-                className="text-xs text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1"
+                className="text-xs text-blue-400 hover:text-blue-300 font-medium flex items-center gap-1 active:scale-95"
               >
                 Xem báo cáo kho →
               </button>
@@ -452,12 +717,12 @@ export default function EquipmentManagementPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 2: XUẤT NHẬP KHO & TỒN KHO (MATCHING IMAGE 6 & 7) */}
+      {/* TAB 2: XUẤT NHẬP KHO & TỒN KHO */}
       {/* ========================================================================= */}
       {activeTab === 'warehouse' && (
         <div className="space-y-5 pt-5">
-          {/* Sub-tab switcher */}
-          <div className="flex justify-between items-center border-b border-slate-800 pb-3">
+          {/* Sub-tab switcher & Action Buttons */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-3">
             <div className="flex gap-2">
               <button
                 onClick={() => setWarehouseSubTab('tickets')}
@@ -467,7 +732,7 @@ export default function EquipmentManagementPage() {
                     : 'bg-[#111c35] text-slate-400 hover:text-white'
                 }`}
               >
-                Phiếu kho thiết bị (1.369 dòng)
+                Phiếu kho thiết bị ({ticketsList.length} phiếu)
               </button>
               <button
                 onClick={() => setWarehouseSubTab('inventory')}
@@ -481,8 +746,36 @@ export default function EquipmentManagementPage() {
               </button>
             </div>
 
-            <div className="text-xs text-slate-400">
-              {warehouseSubTab === 'tickets' ? 'Quản lý phiếu nhập / xuất / điều chuyển' : 'Báo cáo số lượng tồn theo từng điểm kho'}
+            {/* Sub-tab Context Actions */}
+            <div className="flex items-center gap-2">
+              {warehouseSubTab === 'tickets' ? (
+                <>
+                  <button 
+                    onClick={() => {
+                      const headers = ['Số phiếu', 'Loại', 'Ngày', 'Kho nguồn', 'Kho đích', 'Đối tác', 'Số dòng', 'Trạng thái'];
+                      const rows = filteredTickets.map(t => [t.code, t.type, t.date, t.source, t.target, t.partner, t.rows, t.status]);
+                      downloadCSV('ECONS_Danh_Sach_Phieu_Kho.csv', headers, rows);
+                      triggerToast('Đã xuất file Excel danh sách phiếu kho!');
+                    }}
+                    className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all"
+                  >
+                    📥 Xuất Excel
+                  </button>
+                  <button 
+                    onClick={() => setShowCreateTicketModal(true)}
+                    className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow active:scale-95"
+                  >
+                    + Tạo phiếu kho mới
+                  </button>
+                </>
+              ) : (
+                <button 
+                  onClick={quickExportInventory}
+                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow"
+                >
+                  📥 Xuất Excel tồn kho (1.959 dòng)
+                </button>
+              )}
             </div>
           </div>
 
@@ -501,7 +794,7 @@ export default function EquipmentManagementPage() {
                   />
                 </div>
                 <div className="text-xs text-slate-400">
-                  Hiển thị <span className="text-white font-bold">{filteredTickets.length}</span> / 1.369 phiếu
+                  Hiển thị <span className="text-white font-bold">{filteredTickets.length}</span> / {ticketsList.length} phiếu
                 </div>
               </div>
 
@@ -519,13 +812,19 @@ export default function EquipmentManagementPage() {
                       <th className="p-3.5">Đối tượng</th>
                       <th className="p-3.5 text-center">Số dòng</th>
                       <th className="p-3.5 text-center">Trạng thái</th>
+                      <th className="p-3.5 text-center">Hành động</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60 font-mono text-slate-300">
                     {filteredTickets.map((t, idx) => (
-                      <tr key={t.id} className="hover:bg-slate-800/40 transition-colors">
+                      <tr key={t.id || idx} className="hover:bg-slate-800/40 transition-colors">
                         <td className="p-3.5 text-slate-500">{idx + 1}</td>
-                        <td className="p-3.5 font-bold text-blue-400">{t.code}</td>
+                        <td 
+                          onClick={() => setSelectedTicket(t)}
+                          className="p-3.5 font-bold text-blue-400 hover:underline cursor-pointer"
+                        >
+                          {t.code}
+                        </td>
                         <td className="p-3.5 font-sans">
                           <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
                             t.type === 'Xuất kho' ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' :
@@ -544,6 +843,14 @@ export default function EquipmentManagementPage() {
                           <span className="px-2 py-0.5 bg-emerald-950/60 text-emerald-400 border border-emerald-800 text-[10px] font-bold rounded">
                             {t.status}
                           </span>
+                        </td>
+                        <td className="p-3.5 text-center font-sans">
+                          <button 
+                            onClick={() => setSelectedTicket(t)}
+                            className="px-2.5 py-1 bg-slate-800 hover:bg-blue-600 text-slate-300 hover:text-white rounded text-[10px] font-semibold transition-colors"
+                          >
+                            Chi tiết & Ảnh
+                          </button>
                         </td>
                       </tr>
                     ))}
@@ -570,7 +877,12 @@ export default function EquipmentManagementPage() {
                   <input
                     type="checkbox"
                     checked={showNegativeOnly}
-                    onChange={(e) => setShowNegativeOnly(e.target.checked)}
+                    onChange={(e) => {
+                      setShowNegativeOnly(e.target.checked);
+                      if (e.target.checked) {
+                        triggerToast('Đang lọc 90 mã vật tư có số dư tồn âm để kiểm đếm!');
+                      }
+                    }}
                     className="rounded border-slate-700 text-red-500 focus:ring-0"
                   />
                   <span>Chỉ dòng tồn âm (90 mã cảnh báo)</span>
@@ -593,9 +905,11 @@ export default function EquipmentManagementPage() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                    {INVENTORY_ITEMS_SAMPLE.filter(item => {
+                    {materialsList.filter(item => {
                       const q = inventorySearch.toLowerCase();
-                      return item.ten.toLowerCase().includes(q) || item.ma.toLowerCase().includes(q) || item.kho.toLowerCase().includes(q);
+                      const matchSearch = item.ten.toLowerCase().includes(q) || item.ma.toLowerCase().includes(q) || item.kho.toLowerCase().includes(q);
+                      if (showNegativeOnly) return matchSearch && item.ton < 0;
+                      return matchSearch;
                     }).map((item, idx) => (
                       <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
                         <td className="p-3.5 text-slate-500 font-mono">{item.stt}</td>
@@ -610,7 +924,9 @@ export default function EquipmentManagementPage() {
                           </span>
                         </td>
                         <td className="p-3.5 text-slate-300">{item.soHuu}</td>
-                        <td className="p-3.5 text-right font-mono font-bold text-emerald-400">{formatNumber(item.ton)}</td>
+                        <td className={`p-3.5 text-right font-mono font-bold ${item.ton < 0 ? 'text-red-400' : 'text-emerald-400'}`}>
+                          {formatNumber(item.ton)}
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -622,11 +938,11 @@ export default function EquipmentManagementPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 3: BẢO TRÌ & THIẾT BỊ LỚN (MATCHING IMAGE 9) */}
+      {/* TAB 3: BẢO TRÌ & THIẾT BỊ LỚN */}
       {/* ========================================================================= */}
       {activeTab === 'maintenance' && (
         <div className="space-y-6 pt-5">
-          {/* 2 Big Alerts */}
+          {/* 2 Big Alerts with ACTIVE BUTTONS */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-4 bg-red-950/40 border border-red-800/70 rounded-xl flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
@@ -638,7 +954,10 @@ export default function EquipmentManagementPage() {
                   <p className="text-xs text-red-300">4 hết hạn · 40 chưa từng kiểm định an toàn</p>
                 </div>
               </div>
-              <button className="px-3 py-1.5 bg-red-900 hover:bg-red-800 text-white text-xs font-semibold rounded-lg shrink-0">
+              <button 
+                onClick={() => setShowInspectionModal(true)}
+                className="px-3.5 py-2 bg-red-600 hover:bg-red-500 text-white text-xs font-bold rounded-lg shrink-0 shadow transition-all active:scale-95"
+              >
                 Kiểm định ngay →
               </button>
             </div>
@@ -653,17 +972,20 @@ export default function EquipmentManagementPage() {
                   <p className="text-xs text-amber-300">Sớm nhất 15/09/2026 — quá 9 ngày định kỳ tháng</p>
                 </div>
               </div>
-              <button className="px-3 py-1.5 bg-amber-900 hover:bg-amber-800 text-white text-xs font-semibold rounded-lg shrink-0">
+              <button 
+                onClick={() => setShowMaintenanceModal(true)}
+                className="px-3.5 py-2 bg-amber-600 hover:bg-amber-500 text-slate-950 text-xs font-bold rounded-lg shrink-0 shadow transition-all active:scale-95"
+              >
                 Lịch bảo dưỡng →
               </button>
             </div>
           </div>
 
-          {/* Group Header Card */}
+          {/* Group Header Card & Action Bar */}
           <div className="bg-[#111c35] border border-blue-500/40 p-4 rounded-xl flex flex-wrap justify-between items-center gap-4">
             <div>
               <div className="text-xs text-blue-400 font-bold uppercase tracking-wider">Danh mục tài sản lớn</div>
-              <div className="text-lg font-extrabold text-white">Cẩu tháp và các phụ kiện · 36 thiết bị</div>
+              <div className="text-lg font-extrabold text-white">Cẩu tháp và các phụ kiện · {heavyData.length} thiết bị</div>
             </div>
             <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
               <div>
@@ -685,8 +1007,8 @@ export default function EquipmentManagementPage() {
             </div>
           </div>
 
-          {/* Search & Filter */}
-          <div className="flex justify-between items-center gap-3">
+          {/* Search & Actions */}
+          <div className="flex flex-wrap justify-between items-center gap-3">
             <input
               type="text"
               value={heavySearch}
@@ -694,8 +1016,26 @@ export default function EquipmentManagementPage() {
               placeholder="Lọc theo mã máy, tên cẩu tháp, công trường..."
               className="w-80 bg-[#111c35] border border-slate-700 text-xs rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500"
             />
-            <div className="text-xs text-slate-400">
-              Có <strong className="text-white">{filteredHeavy.length}</strong> thiết bị
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => {
+                  const headers = ['STT', 'Mã máy', 'Tên thiết bị', 'Nhóm', 'Nguyên giá', 'Hạn khấu hao', 'Vị trí hiện tại', 'Trạng thái', 'CP Bảo dưỡng', 'Khấu hao LK', 'Giá trị còn lại'];
+                  const rows = filteredHeavy.map((item, idx) => [
+                    idx + 1, item.code, item.name, item.group, item.cost, item.date_end, item.location, item.status, item.maint_cost, item.depreciation, item.remaining_value
+                  ]);
+                  downloadCSV('ECONS_Bang_Khau_Hao_Thiet_Bi_Lon.csv', headers, rows);
+                  triggerToast('Đã xuất Excel bảng tính khấu hao thiết bị lớn!');
+                }}
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all"
+              >
+                📥 Xuất Excel khấu hao
+              </button>
+              <button 
+                onClick={() => setShowAddEquipmentModal(true)}
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow active:scale-95"
+              >
+                + Khai báo thiết bị lớn mới
+              </button>
             </div>
           </div>
 
@@ -716,7 +1056,11 @@ export default function EquipmentManagementPage() {
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
                 {filteredHeavy.map((item, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                  <tr 
+                    key={idx} 
+                    onClick={() => triggerToast(`Thiết bị ${item.code} (${item.name}): Vị trí ${item.location} - Giá trị còn lại ${formatVND(item.remaining_value)}`)}
+                    className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                  >
                     <td className="p-3.5">
                       <div className="font-mono font-bold text-blue-400">{item.code}</div>
                       <div className="text-slate-300 text-xs mt-0.5">{item.name}</div>
@@ -754,7 +1098,7 @@ export default function EquipmentManagementPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 4: DOANH THU & CHI PHÍ - GAMUDA (MATCHING IMAGE 11) */}
+      {/* TAB 4: DOANH THU & CHI PHÍ - GAMUDA */}
       {/* ========================================================================= */}
       {activeTab === 'financial' && (
         <div className="space-y-6 pt-5">
@@ -766,8 +1110,23 @@ export default function EquipmentManagementPage() {
               <p className="text-xs text-slate-400 mt-0.5">Kỳ quyết toán: 24/09/2025 → 24/09/2026</p>
             </div>
             <div className="flex gap-2">
-              <button className="px-3 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg shadow">
-                Xem phụ lục hợp đồng
+              <button 
+                onClick={() => {
+                  const headers = ['Mã VT', 'Tên thiết bị / vật tư', 'Nguồn', 'Số lượng x ngày', 'Đơn giá ngày', 'Thành tiền'];
+                  const rows = gamudaData.map(item => [item.code, item.name, item.source, item.quantity_days, item.unit_price, item.total_amount]);
+                  downloadCSV('ECONS_Bang_Ke_Gamuda_HH2.csv', headers, rows);
+                  triggerToast('Đã xuất Excel bảng kê quyết toán dự án HH2 Gamuda!');
+                }}
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all"
+              >
+                📥 Xuất Excel bảng kê
+              </button>
+              {/* ACTIVE BUTTON: XEM PHỤ LỤC HỢP ĐỒNG */}
+              <button 
+                onClick={() => setShowGamudaAppendixModal(true)}
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg shadow active:scale-95"
+              >
+                📜 Xem phụ lục hợp đồng
               </button>
             </div>
           </div>
@@ -776,7 +1135,7 @@ export default function EquipmentManagementPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-[#111c35] border border-slate-800 p-5 rounded-xl">
               <div className="text-xs font-bold text-slate-400 uppercase">Econs thu từ dự án</div>
-              <div className="text-2xl font-extrabold text-emerald-400 mt-1">11.469.866.999 đ</div>
+              <div className="text-2xl font-extrabold text-emerald-400 mt-1">{formatVND(gamudaRevenue)}</div>
               <p className="text-[11px] text-slate-400 mt-2">
                 Vật tư: 2.47 tỷ · Máy: 1.84 tỷ · Khoản tháng: 1.93 tỷ · Một lần: 4.91 tỷ
               </p>
@@ -792,17 +1151,25 @@ export default function EquipmentManagementPage() {
 
             <div className="bg-[#111c35] border border-emerald-500/40 p-5 rounded-xl bg-gradient-to-br from-[#111c35] to-emerald-950/20">
               <div className="text-xs font-bold text-emerald-400 uppercase">Lợi nhuận gộp còn lại</div>
-              <div className="text-2xl font-extrabold text-white mt-1">9.063.925.767 đ</div>
+              <div className="text-2xl font-extrabold text-white mt-1">{formatVND(gamudaRevenue - 2405941232)}</div>
               <p className="text-[11px] text-emerald-300 mt-2">
                 Tỷ suất sinh lời ấn tượng đạt <strong>79,0%</strong> trên phần tính được
               </p>
             </div>
           </div>
 
-          {/* Alert */}
-          <div className="p-3.5 bg-amber-950/40 border border-amber-800/70 rounded-xl text-xs text-amber-300 flex items-center gap-2">
-            <svg className="w-5 h-5 text-amber-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd"/></svg>
-            <span><strong>1 mã đang có mặt ở công trình nhưng CHƯA KHAI GIÁ: ALTC1200</strong> — Cần cập nhật đơn giá vào thẻ hợp đồng để bổ sung doanh thu!</span>
+          {/* Alert with ACTIVE BUTTON to update ALTC1200 price */}
+          <div className="p-3.5 bg-amber-950/40 border border-amber-800/70 rounded-xl text-xs text-amber-300 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div className="flex items-center gap-2">
+              <svg className="w-5 h-5 text-amber-400 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd"/></svg>
+              <span><strong>1 mã đang có mặt ở công trình nhưng CHƯA KHAI GIÁ: ALTC1200</strong> — Cần cập nhật đơn giá vào thẻ hợp đồng để bổ sung doanh thu!</span>
+            </div>
+            <button 
+              onClick={() => setShowUpdatePriceModal(true)}
+              className="px-3 py-1.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded-lg shrink-0 shadow transition-all active:scale-95"
+            >
+              🏷️ Cập nhật đơn giá ngay
+            </button>
           </div>
 
           {/* Rental Items Table */}
@@ -819,7 +1186,7 @@ export default function EquipmentManagementPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-800/60 font-mono text-slate-300">
-                {GAMUDA_RENTAL_DATA.map((item, idx) => (
+                {gamudaData.map((item, idx) => (
                   <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
                     <td className="p-3.5 font-bold text-blue-400">{item.code}</td>
                     <td className="p-3.5 font-sans font-medium text-white">{item.name}</td>
@@ -844,20 +1211,31 @@ export default function EquipmentManagementPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 5: HỢP ĐỒNG & ĐIỀU KHOẢN (MATCHING IMAGE 10) */}
+      {/* TAB 5: HỢP ĐỒNG & ĐIỀU KHOẢN */}
       {/* ========================================================================= */}
       {activeTab === 'contracts' && (
         <div className="space-y-5 pt-5">
           {/* Alert */}
-          <div className="p-4 bg-amber-950/40 border border-amber-800/70 rounded-xl text-xs text-amber-300">
-            <strong>4 hợp đồng chưa khai bảng giá</strong> — Hợp đồng cho thuê mà chưa có dòng giá nào thì bảng kê tiền thuê không tính được đồng nào cho nó. Mở thẻ hợp đồng để xem đã khai những gì.
+          <div className="p-4 bg-amber-950/40 border border-amber-800/70 rounded-xl text-xs text-amber-300 flex justify-between items-center">
+            <div>
+              <strong>4 hợp đồng chưa khai bảng giá</strong> — Hợp đồng cho thuê mà chưa có dòng giá nào thì bảng kê tiền thuê không tính được đồng nào cho nó.
+            </div>
+            <button 
+              onClick={() => {
+                setContractFilter('unpriced');
+                triggerToast('Đã lọc hiển thị các hợp đồng chưa có bảng giá');
+              }}
+              className="px-3 py-1 bg-amber-600 hover:bg-amber-500 text-slate-950 font-bold rounded text-xs ml-3 shrink-0"
+            >
+              Lọc xem 4 HĐ này
+            </button>
           </div>
 
-          {/* Filter Bar */}
+          {/* Filter Bar & Action Buttons */}
           <div className="flex flex-wrap gap-2 items-center justify-between border-b border-slate-800 pb-3">
             <div className="flex gap-2">
               {[
-                { id: 'all', label: 'Tất cả (119)' },
+                { id: 'all', label: `Tất cả (${contractsList.length})` },
                 { id: 'rent_out', label: 'Cho thuê thiết bị (67)' },
                 { id: 'rent_in', label: 'Đi thuê ngoài (50)' },
               ].map(f => (
@@ -875,8 +1253,24 @@ export default function EquipmentManagementPage() {
               ))}
             </div>
 
-            <div className="text-xs text-slate-400">
-              Quản lý 119 hợp đồng kinh tế của công ty thiết bị
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => {
+                  const headers = ['Số HĐ', 'Loại', 'Đối tác', 'Dự án', 'Bắt đầu', 'Giá trị', 'Khai báo giá', 'Trạng thái'];
+                  const rows = filteredContracts.map(c => [c.code, c.type, c.partner, c.project, c.date_start, c.val, c.declared, c.status]);
+                  downloadCSV('ECONS_Danh_Sach_Hop_Dong_Kinh_Te.csv', headers, rows);
+                  triggerToast('Đã xuất Excel danh mục hợp đồng!');
+                }}
+                className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all"
+              >
+                📥 Xuất Excel
+              </button>
+              <button 
+                onClick={() => setShowCreateContractModal(true)}
+                className="px-3.5 py-1.5 bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow active:scale-95"
+              >
+                + Tạo hợp đồng mới
+              </button>
             </div>
           </div>
 
@@ -896,7 +1290,11 @@ export default function EquipmentManagementPage() {
               </thead>
               <tbody className="divide-y divide-slate-800/60 text-slate-300">
                 {filteredContracts.map((c, idx) => (
-                  <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                  <tr 
+                    key={idx} 
+                    onClick={() => triggerToast(`Hợp đồng ${c.code}: ${c.partner} - Dự án ${c.project} (${c.val})`)}
+                    className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                  >
                     <td className="p-3.5 font-mono font-bold text-blue-400">{c.code}</td>
                     <td className="p-3.5">
                       <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${
@@ -929,32 +1327,60 @@ export default function EquipmentManagementPage() {
       )}
 
       {/* ========================================================================= */}
-      {/* TAB 6: THIẾT LẬP & DANH MỤC (MATCHING IMAGE 8 & 16) */}
+      {/* TAB 6: THIẾT LẬP & DANH MỤC */}
       {/* ========================================================================= */}
       {activeTab === 'settings' && (
         <div className="space-y-5 pt-5">
-          {/* Sub-tab switcher */}
-          <div className="flex gap-2 border-b border-slate-800 pb-3">
-            <button
-              onClick={() => setSettingsSubTab('tenants')}
-              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-                settingsSubTab === 'tenants'
-                  ? 'bg-blue-600 text-white shadow'
-                  : 'bg-[#111c35] text-slate-400 hover:text-white'
-              }`}
-            >
-              Bên thuê (22 đối tác)
-            </button>
-            <button
-              onClick={() => setSettingsSubTab('materials')}
-              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
-                settingsSubTab === 'materials'
-                  ? 'bg-blue-600 text-white shadow'
-                  : 'bg-[#111c35] text-slate-400 hover:text-white'
-              }`}
-            >
-              Danh mục vật tư (503 mã)
-            </button>
+          {/* Sub-tab switcher & Action Buttons */}
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-slate-800 pb-3">
+            <div className="flex gap-2">
+              <button
+                onClick={() => setSettingsSubTab('tenants')}
+                className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  settingsSubTab === 'tenants'
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'bg-[#111c35] text-slate-400 hover:text-white'
+                }`}
+              >
+                Bên thuê ({tenantsList.length} đối tác)
+              </button>
+              <button
+                onClick={() => setSettingsSubTab('materials')}
+                className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all ${
+                  settingsSubTab === 'materials'
+                    ? 'bg-blue-600 text-white shadow'
+                    : 'bg-[#111c35] text-slate-400 hover:text-white'
+                }`}
+              >
+                Danh mục vật tư (503 mã)
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {settingsSubTab === 'tenants' ? (
+                <>
+                  <button 
+                    onClick={quickExportTenants}
+                    className="px-3 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all"
+                  >
+                    📥 Xuất Excel bên thuê
+                  </button>
+                  <button 
+                    onClick={() => setShowAddTenantModal(true)}
+                    className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow active:scale-95"
+                  >
+                    + Thêm bên thuê mới
+                  </button>
+                </>
+              ) : (
+                <button 
+                  onClick={quickExportInventory}
+                  className="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-semibold rounded-lg flex items-center gap-1.5 transition-all shadow"
+                >
+                  📥 Xuất Excel 503 mã vật tư
+                </button>
+              )}
+            </div>
           </div>
 
           {/* Tenants Table */}
@@ -972,8 +1398,12 @@ export default function EquipmentManagementPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                  {TENANTS_DATA.map((t, idx) => (
-                    <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                  {tenantsList.map((t, idx) => (
+                    <tr 
+                      key={idx} 
+                      onClick={() => triggerToast(`Đối tác: ${t.name} (MST: ${t.mst})`)}
+                      className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                    >
                       <td className="p-3.5 text-slate-500 font-mono">{idx + 1}</td>
                       <td className="p-3.5 font-mono font-bold text-blue-400">{t.code}</td>
                       <td className="p-3.5 font-medium text-white">{t.name}</td>
@@ -1008,8 +1438,12 @@ export default function EquipmentManagementPage() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-800/60 text-slate-300">
-                  {INVENTORY_ITEMS_SAMPLE.map((m, idx) => (
-                    <tr key={idx} className="hover:bg-slate-800/40 transition-colors">
+                  {materialsList.map((m, idx) => (
+                    <tr 
+                      key={idx} 
+                      onClick={() => triggerToast(`Vật tư: ${m.ma} - ${m.ten} (${m.nhom})`)}
+                      className="hover:bg-slate-800/40 transition-colors cursor-pointer"
+                    >
                       <td className="p-3.5 text-slate-500 font-mono">{idx + 1}</td>
                       <td className="p-3.5 font-mono font-bold text-blue-400">{m.ma}</td>
                       <td className="p-3.5 font-medium text-white">{m.ten}</td>
